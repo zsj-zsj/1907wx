@@ -9,11 +9,12 @@ class WxController extends Controller
 {
     public function checkSignature()
     {
+        $token = '12345678asdfgh';
         $signature = $_GET["signature"];
         $timestamp = $_GET["timestamp"];
         $nonce = $_GET["nonce"];
         $echostr=$_GET["echostr"];
-        $token = '12345678asdfgh';
+        
         $tmpArr = array($token, $timestamp, $nonce);
         sort($tmpArr, SORT_STRING);
         $tmpStr = implode( $tmpArr );
@@ -24,6 +25,13 @@ class WxController extends Controller
         }else{
             die;
         }
+    }
+
+    public function wxdo(){
+        $file=file_get_contents("php://input");
+        $data=date('Y-m-d H:i:s').$file;
+        file_put_contents('1907wx.log',$data);
+        $xml=simplexml_load_string($file);
     }
 
 

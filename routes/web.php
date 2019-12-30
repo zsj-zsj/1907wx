@@ -21,6 +21,7 @@ Route::get('phpinfo',function(){
 
 
 Route::get('wx','Wx\WxController@checkSignature');
+Route::post('wx','Wx\WxController@wxdo');
 
 
 
