@@ -30,7 +30,7 @@ class WxController extends Controller
     public function wxdo(){
         $file=file_get_contents("php://input");
         $data=date('Y-m-d H:i:s').$file;
-        file_put_contents('1907wx.log',$data);
+        file_put_contents('1907wx.log',$data,FILE_APPEND);
         $xml=simplexml_load_string($file);
 
 
@@ -42,8 +42,22 @@ class WxController extends Controller
 
         $MsgType=$xml->MsgType;     //消息类型
         $MediaId=$xml->MediaId;     //通过素材管理中的接口上传多媒体文件，得到的id。
-        $Content=$xml->Content;
-           
+        $Content=trim($xml->Content);   //回复消息内容
+        $Event=$xml->Event;      //事件类型   关注取关的
+
+
+        if($Event=='subscribe'){
+            $huifu='<xml>
+            <ToUserName><![CDATA['.$openid.']]></ToUserName>
+            <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
+            <CreateTime>'.time().'</CreateTime>
+            <MsgType><![CDATA[text]]></MsgType>
+            <Content><![CDATA[你好sdfghgfdfg]]></Content>
+          </xml>';
+          echo $huifu;
+        }
+        
+        //  判断消息类型   回复消息
         if($MsgType=='text'){
             $texts=date('Y-m-d H:i:s').'：'.$Content;
             $text='<xml>
