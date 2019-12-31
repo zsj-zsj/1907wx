@@ -47,27 +47,17 @@ class WxController extends Controller
 
 
         if($Event=='subscribe'){
-            $huifu='<xml>
-            <ToUserName><![CDATA['.$openid.']]></ToUserName>
-            <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
-            <CreateTime>'.time().'</CreateTime>
-            <MsgType><![CDATA[text]]></MsgType>
-            <Content><![CDATA[你好sdfghgfdfg]]></Content>
-          </xml>';
-          echo $huifu;
+            $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：欢迎关注");
         }
         
-        //  判断消息类型   回复消息
+        //  判断消息类型   回复消息   发啥回啥
         if($MsgType=='text'){
-            $texts=date('Y-m-d H:i:s').'：'.$Content;
-            $text='<xml>
-            <ToUserName><![CDATA['.$openid.']]></ToUserName>
-            <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
-            <CreateTime>'.time().'</CreateTime>
-            <MsgType><![CDATA[text]]></MsgType>
-            <Content><![CDATA['.$texts.']]></Content>
-          </xml>';
-          echo $text;
+          // if($Content=='1'){
+          //   $this->echomsg($openid,$ToUserName,"好");
+          // }elseif($Content=='2'){
+          //   $this->echomsg($openid,$ToUserName,"哦哦哦哦哦哦");
+          // }
+          $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s').$Content);
         }elseif($MsgType=='image'){
             $image='<xml>
             <ToUserName><![CDATA['.$openid.']]></ToUserName>
@@ -93,6 +83,17 @@ class WxController extends Controller
         }
         
 
+    }
+
+    public function echomsg($openid,$ToUserName,$Content){
+      $huifu='<xml>
+            <ToUserName><![CDATA['.$openid.']]></ToUserName>
+            <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
+            <CreateTime>'.time().'</CreateTime>
+            <MsgType><![CDATA[text]]></MsgType>
+            <Content><![CDATA['.$Content.']]></Content>
+          </xml>';
+          echo $huifu;
     }
 
 
