@@ -28,13 +28,10 @@ class WxController extends Controller
     }
 
     public function wxdo(){
-        $file=file_get_contents("php://input");
+        $file=file_get_contents("php://input"); 
         $data=date('Y-m-d H:i:s').$file;
         file_put_contents('1907wx.log',$data,FILE_APPEND);
         $xml=simplexml_load_string($file);
-
-
-        
 
 
         $ToUserName=$xml->ToUserName;  //开发者的公众号ID
@@ -50,7 +47,7 @@ class WxController extends Controller
             $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：欢迎关注");
         }
         
-        //  判断消息类型   回复消息   发啥回啥
+        //  判断消息类型   回复消息  
         $student=["1","2","3","4","5"];
         if($MsgType=='text'){
           if($Content=='1'){
@@ -60,15 +57,29 @@ class WxController extends Controller
             shuffle($student);
             $Content=$student[0];
             $this->echomsg($openid,$ToUserName,$Content);
+          }elseif(mb_strpos($Content,"天气" ) !== false ){
+            //正确城市天气   
+            $city=rtrim($Content,"天气"); 
+            if(empty($city)){
+              $city="北京";
+            }
+            //获取天气的接口
+            $url='http://api.k780.com/?app=weather.future&weaid='.$city.'&&appkey=47849&sign=e81267f4e38b5f4ab04eab868bfdd1f7&format=json';
+            $weater=file_get_contents($url);   //发送get请求  接受xml数据
+            $arr=json_decode($weater,true);    //转换数组
+            
+            //没有这个城市,  天气数据  返回0   回复消息:发什么回什么  
+            //有 有效城市  返回1    回复城市天气
+            if($arr['success']==0){
+              $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content);die;
+            }elseif($arr['success']==1){
+              $Content="";
+              foreach($arr['result'] as $k=>$v){
+                $Content .="日期：".$v['days']." " .$v['week']."，城市：".$v['citynm']."，气温：".$v['temperature']."\n";
+              }
+            }
+            $this->echomsg($openid,$ToUserName,$Content); 
           }
-          // elseif($Content=='天气' ){
-          //   $url="http://api.k780.com/?app=weather.wtype&weaid=citynm&ag=today,futureDay,lifeIndex,futureHour&appkey=47849&sign=d7e53643813c160f88b20d0a70e67052";
-          //   $weater=file_get_contents($url);
-          //   $arr=json_decode($weater,true);
-          //   $Content=$arr['success'];
-          //   $this->echomsg($openid,$ToUserName,$Content);
-          // }
-          // $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s').$Content);
         }elseif($MsgType=='image'){
             $image='<xml>
             <ToUserName><![CDATA['.$openid.']]></ToUserName>
