@@ -51,13 +51,24 @@ class WxController extends Controller
         }
         
         //  判断消息类型   回复消息   发啥回啥
+        $student=["1","2","3","4","5"];
         if($MsgType=='text'){
-          // if($Content=='1'){
-          //   $this->echomsg($openid,$ToUserName,"好");
-          // }elseif($Content=='2'){
-          //   $this->echomsg($openid,$ToUserName,"哦哦哦哦哦哦");
+          if($Content=='1'){
+            $Content=implode(',',$student);
+            $this->echomsg($openid,$ToUserName,$Content);
+          }elseif($Content=='2'){
+            shuffle($student);
+            $Content=$student[0];
+            $this->echomsg($openid,$ToUserName,$Content);
+          }
+          // elseif($Content=='天气' ){
+          //   $url="http://api.k780.com/?app=weather.wtype&weaid=citynm&ag=today,futureDay,lifeIndex,futureHour&appkey=47849&sign=d7e53643813c160f88b20d0a70e67052";
+          //   $weater=file_get_contents($url);
+          //   $arr=json_decode($weater,true);
+          //   $Content=$arr['success'];
+          //   $this->echomsg($openid,$ToUserName,$Content);
           // }
-          $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s').$Content);
+          // $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s').$Content);
         }elseif($MsgType=='image'){
             $image='<xml>
             <ToUserName><![CDATA['.$openid.']]></ToUserName>
