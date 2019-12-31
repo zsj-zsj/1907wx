@@ -71,7 +71,7 @@ class WxController extends Controller
             //没有这个城市,  天气数据  返回0   回复消息:发什么回什么  
             //有 有效城市  返回1    回复城市天气
             if($arr['success']==0){
-              $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content);die;
+              $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content."没有该城市天气");die;
             }elseif($arr['success']==1){
               $Content="";
               foreach($arr['result'] as $k=>$v){
