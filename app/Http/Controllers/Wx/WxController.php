@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Wx;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Model\WxUserModel;
+
 class WxController extends Controller
 {
     public function checkSignature()
@@ -42,6 +44,30 @@ class WxController extends Controller
         $Content=trim($xml->Content);   //回复消息内容
         $Event=$xml->Event;      //事件类型   关注取关的
 
+        $accesstoken='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx8bc80f5949fda528&secret=f4852897a0b441624d7c845c878f2548';
+        $access=file_get_contents($accesstoken);
+        // dd($access);
+        $access_token=json_decode($access,true);
+        // dd($access_token);
+        $arr=$access_token['access_token'];
+        $urls='https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$arr.'&openid=wx8bc80f5949fda528&lang=zh_CN';
+        // dd($urls);
+        $aaa=file_get_contents($urls);
+        dd($aaa);;
+        $user=json_decode($aaa,true);
+        dd($user);
+       
+
+        $data=[
+          'city'=>$user['city'],
+          'nickname'=>$user['name'],
+          'sex'=>$user['sex'],
+          'headimgurl'=>$user['head'],
+          'openid'=>$openid,
+          'subscribe_time'=>$user['time']
+        ];
+        $u=WxUserModel::where('openid','=',$openid)->first($data);
+        dd($u);
 
         if($Event=='subscribe'){
             $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：欢迎关注");
