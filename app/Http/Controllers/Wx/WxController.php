@@ -50,27 +50,35 @@ class WxController extends Controller
         $access_token=json_decode($access,true);
         // dd($access_token);
         $arr=$access_token['access_token'];
-        $urls='https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$arr.'&openid=wx8bc80f5949fda528&lang=zh_CN';
+        $urls='https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$arr.'&openid='.$openid.'&lang=zh_CN';
         // dd($urls);
         $aaa=file_get_contents($urls);
-        dd($aaa);;
+        // dd($aaa);;
         $user=json_decode($aaa,true);
-        dd($user);
+        // dd($user);
        
 
         $data=[
-          'city'=>$user['city'],
-          'nickname'=>$user['name'],
+          
+          'nickname'=>$user['nickname'],
           'sex'=>$user['sex'],
-          'headimgurl'=>$user['head'],
-          'openid'=>$openid,
-          'subscribe_time'=>$user['time']
+          'head'=>$user['headimgurl'],
+          'openid'=>$user['openid'],
+          'time'=>$user['subscribe_time'],
+          'city'=>$user['city'],
         ];
-        $u=WxUserModel::where('openid','=',$openid)->first($data);
-        dd($u);
-
+        // dd($data);
+        // echo 1;
+        $u=WxUserModel::where('openid','=',$openid)->first();
+        // echo 2;
+        // dd($u);
         if($Event=='subscribe'){
-            $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：欢迎关注");
+          if($u){
+            $this->echomsg($openid,$ToUserName,"欢迎回来");
+          }else{
+            $u=WxUserModel::insert($data);
+            $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s').'：欢迎关注~@'.$user['nickname']);
+          }
         }
         
         //  判断消息类型   回复消息  
@@ -87,7 +95,7 @@ class WxController extends Controller
             //正确城市天气   
             $city=rtrim($Content,"天气"); 
             if(empty($city)){
-              $city="北京";
+              $city=$user['city'];
             }
             //获取天气的接口
             $url='http://api.k780.com/?app=weather.future&weaid='.$city.'&&appkey=47849&sign=e81267f4e38b5f4ab04eab868bfdd1f7&format=json';
@@ -97,7 +105,7 @@ class WxController extends Controller
             //没有这个城市,  天气数据  返回0   回复消息:发什么回什么  
             //有 有效城市  返回1    回复城市天气
             if($arr['success']==0){
-              $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content."：没有该城市天气");die;
+              $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content."：请输入正确的城市+天气，然后可以获取当地天气");die;
             }elseif($arr['success']==1){
               $Content="";
               foreach($arr['result'] as $k=>$v){
