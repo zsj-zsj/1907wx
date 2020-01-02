@@ -48,7 +48,7 @@ class WxController extends Controller
         $Event=$xml->Event;      //事件类型   关注取关的
    
 
-        $user=Wechat::getUserInfoByOpenid($openid);         //调用的方法  获取的用户信息是数组 = 在传
+        $user=Wechat::getUserInfoByOpenid($openid);         //调用的方法  获取的用户信息是数组 返回要等于 
 
         $data=[
           'nickname'=>$user['nickname'],
@@ -58,7 +58,7 @@ class WxController extends Controller
           'time'=>$user['subscribe_time'],
           'city'=>$user['city'],
         ];
-        
+
         // dd($data);
         // echo 1;
         $u=WxUserModel::where('openid','=',$openid)->first();

@@ -2,6 +2,7 @@
 
 namespace App\Tools;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 
 class Wechat 
 {
@@ -34,6 +35,21 @@ class Wechat
             Cache::put('access_token',$arr,7200);
         }
         return  $arr;
+
+            //存redis
+            // $key='access_token';
+            // $token=Redis::get($key);
+            // if($token){
+            //   return $token;
+            // }
+            // $accesstoken='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.env('APPID').'&secret='.env('APPSECRET').'';
+            // $access=file_get_contents($accesstoken);
+            // $access_token=json_decode($access,true);
+            // $arr=$access_token['access_token'];
+            // Redis::set($key,$arr);
+            // Redis::expire($key,3600);
+            // return $arr;
+
       }
 
 
@@ -41,7 +57,6 @@ class Wechat
       public static function getUserInfoByOpenid($openid){
         $arrss=Self::getAccessToken();
         // dd($arrss);
-
         $urls='https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$arrss.'&openid='.$openid.'&lang=zh_CN';
         // dd($urls);
         $aaa=file_get_contents($urls);
