@@ -19,9 +19,10 @@ Route::get('phpinfo',function(){
     phpinfo();
 });
 
-
+//微信
 Route::get('wx','Wx\WxController@checkSignature');
 Route::post('wx','Wx\WxController@wxdo');
 
 
 
+//后台

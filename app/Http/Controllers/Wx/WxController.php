@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Model\WxUserModel;
 
+//微信公共方法
+use App\Tools\Wechat;
+
 class WxController extends Controller
 {
     public function checkSignature()
@@ -74,10 +77,10 @@ class WxController extends Controller
         // dd($u);
         if($Event=='subscribe'){
           if($u){
-            $this->echomsg($openid,$ToUserName,"欢迎回来");
+            Wechat::echomsg($openid,$ToUserName,"欢迎回来");
           }else{
             $u=WxUserModel::insert($data);
-            $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s').'：欢迎关注~@'.$user['nickname']);
+            Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s').'：欢迎关注~@'.$user['nickname']);
           }
         }
         
@@ -86,11 +89,11 @@ class WxController extends Controller
         if($MsgType=='text'){
           if($Content=='1'){
             $Content=implode(',',$student);
-            $this->echomsg($openid,$ToUserName,$Content);
+            Wechat::echomsg($openid,$ToUserName,$Content);
           }elseif($Content=='2'){
             shuffle($student);
             $Content=$student[0];
-            $this->echomsg($openid,$ToUserName,$Content);
+            Wechat::echomsg($openid,$ToUserName,$Content);
           }elseif(mb_strpos($Content,"天气" ) !== false ){
             //正确城市天气   
             $city=rtrim($Content,"天气"); 
@@ -105,16 +108,16 @@ class WxController extends Controller
             //没有这个城市,  天气数据  返回0   回复消息:发什么回什么  
             //有 有效城市  返回1    回复城市天气
             if($arr['success']==0){
-              $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content."：请输入正确的城市+天气，然后可以获取当地天气");die;
+              Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content."：请输入正确的城市+天气，然后可以获取当地天气");die;
             }elseif($arr['success']==1){
               $Content="";
               foreach($arr['result'] as $k=>$v){
                 $Content .="日期：".$v['days']." " .$v['week']."，城市：".$v['citynm']."，气温：".$v['temperature']."\n";
               }
             }
-            $this->echomsg($openid,$ToUserName,$Content); 
+            Wechat::echomsg($openid,$ToUserName,$Content); 
           }elseif($MsgType=='text'){
-            $this->echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content);
+            Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content);
           }
         }elseif($MsgType=='image'){
             $image='<xml>
@@ -142,17 +145,5 @@ class WxController extends Controller
         
 
     }
-
-    public function echomsg($openid,$ToUserName,$Content){
-      $huifu='<xml>
-            <ToUserName><![CDATA['.$openid.']]></ToUserName>
-            <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
-            <CreateTime>'.time().'</CreateTime>
-            <MsgType><![CDATA[text]]></MsgType>
-            <Content><![CDATA['.$Content.']]></Content>
-          </xml>';
-          echo $huifu;
-    }
-
 
 }
