@@ -46,23 +46,11 @@ class WxController extends Controller
         $MediaId=$xml->MediaId;     //通过素材管理中的接口上传多媒体文件，得到的id。
         $Content=trim($xml->Content);   //回复消息内容
         $Event=$xml->Event;      //事件类型   关注取关的
+   
 
-        $accesstoken='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx8bc80f5949fda528&secret=f4852897a0b441624d7c845c878f2548';
-        $access=file_get_contents($accesstoken);
-        // dd($access);
-        $access_token=json_decode($access,true);
-        // dd($access_token);
-        $arr=$access_token['access_token'];
-        $urls='https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$arr.'&openid='.$openid.'&lang=zh_CN';
-        // dd($urls);
-        $aaa=file_get_contents($urls);
-        // dd($aaa);;
-        $user=json_decode($aaa,true);
-        // dd($user);
-       
+        $user=Wechat::getUserInfoByOpenid($openid);         //调用的方法  获取的用户信息是数组 = 在传
 
         $data=[
-          
           'nickname'=>$user['nickname'],
           'sex'=>$user['sex'],
           'head'=>$user['headimgurl'],
@@ -70,6 +58,7 @@ class WxController extends Controller
           'time'=>$user['subscribe_time'],
           'city'=>$user['city'],
         ];
+        
         // dd($data);
         // echo 1;
         $u=WxUserModel::where('openid','=',$openid)->first();
