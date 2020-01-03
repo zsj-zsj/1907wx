@@ -1,26 +1,8 @@
-<!DOCTYPE html>
-<html>
+@extends('admin.layout.layout')
 
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title> - 注册</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-
-    <link rel="shortcut icon" href="favicon.ico"> <link href="/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="/admin/css/animate.css" rel="stylesheet">
-    <link href="/admin/css/style.css?v=4.1.0" rel="stylesheet">
-    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
-
-</head>
-
-<body class="gray-bg">
+@section('title', '注册')
+@section('sidebar')
+@section('content')
     
     <div class="middle-box text-center loginscreen   animated fadeInDown">
         <div>
@@ -60,23 +42,4 @@
         </div>
     </div>
 
-    <!-- 全局js -->
-    <script src="/admin/js/jquery.min.js?v=2.1.4"></script>
-    <script src="/admin/js/bootstrap.min.js?v=3.3.6"></script>
-    <!-- iCheck -->
-    <script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-        });
-    </script>
-
-    
-    
-
-</body>
-
-</html>
+    @endsection
