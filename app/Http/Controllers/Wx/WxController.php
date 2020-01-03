@@ -115,16 +115,18 @@ class WxController extends Controller
             
             
             $aaa=array_column($sss,'media_id');
+            // dd($aaa);
             //$ccc = implode("|", $aaa);
             
             $ll=array_rand($aaa);
+            $kkk=$aaa[$ll];
             $image='<xml>
             <ToUserName><![CDATA['.$openid.']]></ToUserName>
             <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
             <CreateTime>'.time().'</CreateTime>
             <MsgType><![CDATA[image]]></MsgType>
             <Image>
-              <MediaId><![CDATA['.$ll.']]></MediaId>
+              <MediaId><![CDATA['.$kkk.']]></MediaId>
             </Image>
           </xml>';
           echo $image;
