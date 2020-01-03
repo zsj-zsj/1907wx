@@ -12,13 +12,24 @@
                 <th>素材类型</th>
                 <th>素材文件</th>
                 <th>素材格式</th>
+                <th>添加时间</th>
                 <th>操作</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($data as $v)
             <tr class="active" >
-
+                <td>{{$v->m_id}}</td>
+                <td>{{$v->m_name}}</td>
+                <td>@if($v->m_type==1) 临时素材 @else 永久素材 @endif</td>
+                <td> <img src="{{env('APP_URL')}}{{$v->m_url}} " width="100" height="40"></td>
+                <td>{{$v->format}}</td>
+                <td>{{date('Y-m-d H:i:s',$v->time)}}</td>
+                <td>
+                      <a href="">删除</a>  
+                </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 

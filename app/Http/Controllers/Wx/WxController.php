@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Wx;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Model\WxUserModel;
+use App\Model\WxUserModel;  //用户
+use App\Model\MediaModel;   //素材
 
 //微信公共方法
 use App\Tools\Wechat;
@@ -109,13 +110,21 @@ class WxController extends Controller
             Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content);
           }
         }elseif($MsgType=='image'){
+            $img=MediaModel::get();
+            $sss=json_decode($img,true);
+            
+            
+            $aaa=array_column($sss,'media_id');
+            //$ccc = implode("|", $aaa);
+            
+            $ll=array_rand($aaa);
             $image='<xml>
             <ToUserName><![CDATA['.$openid.']]></ToUserName>
             <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
             <CreateTime>'.time().'</CreateTime>
             <MsgType><![CDATA[image]]></MsgType>
             <Image>
-              <MediaId><![CDATA['.$MediaId.']]></MediaId>
+              <MediaId><![CDATA['.$ll.']]></MediaId>
             </Image>
           </xml>';
           echo $image;
@@ -131,8 +140,7 @@ class WxController extends Controller
           </xml>';
           echo $voice;
         }
-        
-
+      
     }
 
 }

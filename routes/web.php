@@ -39,8 +39,10 @@ Route::prefix('/admin')->group(function(){
     Route::get('zhanshi','Index\Index@zhanshi');  //主页中间部分
 
     //素材管理
-    Route::get('media','Index\Media@create');      //素材添加
+    Route::get('media','Index\Media@create');      //展示素材添加
+    Route::post('domedia','Index\Media@store');    //执行添加
     Route::get('medialist','Index\Media@index');      //素材展示
+
 });
 
 
