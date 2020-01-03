@@ -15,10 +15,10 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/admin/css/animate.css" rel="stylesheet">
+    <link href="/admin/css/style.css?v=4.1.0" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -366,7 +366,7 @@
                                 <li class="m-t-xs">
                                     <div class="dropdown-messages-box">
                                         <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="/img/a7.jpg">
+                                            <img alt="image" class="img-circle" src="/admin/img/a7.jpg">
                                         </a>
                                         <div class="media-body">
                                             <small class="pull-right">46小时前</small>
@@ -380,7 +380,7 @@
                                 <li>
                                     <div class="dropdown-messages-box">
                                         <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="/img/a4.jpg">
+                                            <img alt="image" class="img-circle" src="/admin/img/a4.jpg">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right text-navy">25小时前</small>
@@ -444,18 +444,18 @@
     </div>
 
     <!-- 全局js -->
-    <script src="/js/jquery.min.js?v=2.1.4"></script>
-    <script src="/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="/js/plugins/layer/layer.min.js"></script>
+    <script src="/admin/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/admin/js/plugins/layer/layer.min.js"></script>
 
     <!-- 自定义js -->
-    <script src="/js/hAdmin.js?v=4.1.0"></script>
-    <script type="text/javascript" src="/js/index.js"></script>
+    <script src="/admin/js/hAdmin.js?v=4.1.0"></script>
+    <script type="text/javascript" src="/admin/js/index.js"></script>
 
     <!-- 第三方插件 -->
-    <script src="/js/plugins/pace/pace.min.js"></script>
+    <script src="/admin/js/plugins/pace/pace.min.js"></script>
 <div style="text-align:center;">
 <p>来源:<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
 </div>

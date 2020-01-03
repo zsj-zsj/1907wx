@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class Index extends Controller
 {
     public function zhanshi(){
-        return view('admin.admin/index_v1');
+        return view('admin/admin/index_v1');
     }
 
 
@@ -20,7 +20,7 @@ class Index extends Controller
      */
     public function index()
     {
-        return view('admin.admin/index');
+        return view('admin/admin/index');
     }
 
     /**

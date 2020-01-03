@@ -11,11 +11,11 @@
 
     <title> - 主页示例</title>
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
 
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/admin/css/animate.css" rel="stylesheet">
+    <link href="/admin/css/style.css?v=4.1.0" rel="stylesheet">
 
 </head>
 
@@ -237,11 +237,11 @@
                                                         </div>
                                                 </td>
                                                 <td class="project-people">
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a3.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a1.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a2.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a4.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a5.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a3.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a1.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a2.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a4.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a5.jpg"></a>
                                                 </td>
                                                 <td class="project-actions">
                                                     <a href="projects.html#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
@@ -264,9 +264,9 @@
                                                     </div>
                                                 </td>
                                                 <td class="project-people">
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a7.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a6.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a3.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a7.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a6.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a3.jpg"></a>
                                                 </td>
                                                 <td class="project-actions">
                                                     <a href="projects.html#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
@@ -289,8 +289,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="project-people">
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a5.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a3.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a5.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a3.jpg"></a>
                                                 </td>
                                                 <td class="project-actions">
                                                     <a href="projects.html#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
@@ -313,10 +313,10 @@
                                                     </div>
                                                 </td>
                                                 <td class="project-people">
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a2.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a3.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a1.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a7.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a2.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a3.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a1.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a7.jpg"></a>
                                                 </td>
                                                 <td class="project-actions">
                                                     <a href="projects.html#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
@@ -339,7 +339,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="project-people">
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a4.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a4.jpg"></a>
                                                 </td>
                                                 <td class="project-actions">
                                                     <a href="projects.html#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
@@ -362,10 +362,10 @@
                                                     </div>
                                                 </td>
                                                 <td class="project-people">
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a1.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a2.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a4.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a5.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a1.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a2.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a4.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a5.jpg"></a>
                                                 </td>
                                                 <td class="project-actions">
                                                     <a href="projects.html#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
@@ -388,9 +388,9 @@
                                                     </div>
                                                 </td>
                                                 <td class="project-people">
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a7.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a6.jpg"></a>
-                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/img/a3.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a7.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a6.jpg"></a>
+                                                    <a href="projects.html"><img alt="image" class="img-circle" src="/admin/img/a3.jpg"></a>
                                                 </td>
                                                 <td class="project-actions">
                                                     <a href="projects.html#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
@@ -604,16 +604,16 @@
         </div>
     </div>
     <!-- 全局js -->
-    <script src="/js/jquery.min.js?v=2.1.4"></script>
-    <script src="/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="/js/plugins/layer/layer.min.js"></script>
+    <script src="/admin/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/admin/js/plugins/layer/layer.min.js"></script>
     <!-- Flot -->
-    <script src="/js/plugins/flot/jquery.flot.js"></script>
-    <script src="/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-    <script src="/js/plugins/flot/jquery.flot.resize.js"></script>
-    <script src="/js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="/admin/js/plugins/flot/jquery.flot.js"></script>
+    <script src="/admin/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="/admin/js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="/admin/js/plugins/flot/jquery.flot.pie.js"></script>
     <!-- 自定义js -->
-    <script src="/js/content.js"></script>
+    <script src="/admin/js/content.js"></script>
     <!--flotdemo-->
     <script type="text/javascript">
         $(function() {
