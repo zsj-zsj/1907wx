@@ -9,5 +9,5 @@ class MediaModel extends Model
     public $primarkey="m_id";
     protected $table="media";
     public $timestamps= false;
-    protected $guarded=[];
+    protected $guarded=[];   //黑名单
 }

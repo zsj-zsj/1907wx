@@ -110,15 +110,13 @@ class WxController extends Controller
             Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content);
           }
         }elseif($MsgType=='image'){
-            $img=MediaModel::get();
+            $img=MediaModel::where('format','=','image')->get();
             $sss=json_decode($img,true);
             
-            
             $aaa=array_column($sss,'media_id');
-            // dd($aaa);
-            //$ccc = implode("|", $aaa);
             
             $ll=array_rand($aaa);
+            // dd($ll);
             $kkk=$aaa[$ll];
             $image='<xml>
             <ToUserName><![CDATA['.$openid.']]></ToUserName>

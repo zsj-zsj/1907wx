@@ -65,4 +65,23 @@ class Wechat
         // dd($user);
         return $user;
       }
+
+      public static function media($post,$path){
+        $access_token=Self::getAccessToken();
+        $type=$post['format'];     //   三种格式   voice   image  video
+        $url='https://api.weixin.qq.com/cgi-bin/media/upload?access_token='.$access_token.'&type='.$type;
+        // dd($url);
+        
+        $pathObj= new \CURLFile($path);    //处理curl 发送的文件
+    // dd($path);
+        $PostData['media']=$pathObj;
+        // dd($PostData);
+        $res=Curl::CurlPost($url,$PostData);
+        // dd($res);die;
+        $json=json_decode($res,true);
+        // dd($json);
+        // $post=$json['media_id'];
+        return $json;
+      }
+      
 }

@@ -21,6 +21,7 @@
                 </label>
                 <div class="col-sm-10">
                     <input type="file" name="m_url"  class="form-control" id="inputSuccess">
+                    <b style="color:red">{{session('msg')}}</b>
                 </div>
             </div>
             
@@ -44,8 +45,9 @@
                 <div class="col-sm-10">
                     <select name="format" class="form-control" >	
                         <option value="0">请选择</option>
-                        <option value="图片">图片</option>
-                        <option value="语音">语音</option>	
+                        <option value="image">图片</option>
+                        <option value="voice">语音</option>	
+                        <option value="video">视频</option>
                     </select>
                 </div>
             </div>

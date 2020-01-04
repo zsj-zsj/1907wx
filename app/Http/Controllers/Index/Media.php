@@ -25,27 +25,37 @@ class Media extends Controller
     }
 
     public function store(){
+        $post=request()->except('_token');
+        
         $m_url=request()->m_url;
 
         if(!request()->hasFile('m_url')){     
-                 echo "请上传图片谢谢！";die;
+            return redirect('admin/media')->with('msg','请上传文件谢谢');
         }
-        $path=$m_url->store('upload');
-        // dd($path);
-
-        $access_token=Wechat::getAccessToken();
-        $url='https://api.weixin.qq.com/cgi-bin/media/upload?access_token='.$access_token.'&type=image';
+        // $ccc=$m_url->store('');
+        // dd($ccc);
         
-        $pathObj= new \CURLFile($path);    //处理curl 发送的文件
-    // dd($path);
-        $PostData['media']=$pathObj;
-        // dd($PostData);
-        $res=Curl::CurlPost($url,$PostData);
-        // dd($res);die;
-        $json=json_decode($res,true);
-        // dd($json);
-        $post=$json['media_id'];
-        $post=request()->except('_token');
+        $file=$m_url->getClientOriginalExtension ();   //文件后缀名名
+        $filename=md5(uniqid()).'.'.$file;   //加密  
+        $path=$m_url->storeAs('upload',$filename);    //入库的路径  
+        // dd($path);
+          
+    //     $access_token=Wechat::getAccessToken();
+    //     $type=$post['format'];     //   三种格式   voice   image  video
+    //     $url='https://api.weixin.qq.com/cgi-bin/media/upload?access_token='.$access_token.'&type='.$type;
+        
+    //     $pathObj= new \CURLFile($path);    //处理curl 发送的文件
+    // // dd($path);
+    //     $PostData['media']=$pathObj;
+    //     // dd($PostData);
+    //     $res=Curl::CurlPost($url,$PostData);
+    //     // dd($res);die;
+    //     $json=json_decode($res,true);
+    //     // dd($json);
+    //     // $post=$json['media_id'];
+        // $type=$post->format; 
+        // dd($type);
+        $json=Wechat::media($post,$path);
         
         $data=[
             'media_id'=>$json['media_id'],
