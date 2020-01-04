@@ -49,9 +49,11 @@
                         <option value="voice">语音</option>	
                         <option value="video">视频</option>
                     </select>
+                    <b style="color:red">{{session('sss')}}</b>
                 </div>
+                
             </div>
-
+            
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10" >
                     <input type="submit" class="btn btn-danger" value="添加">
@@ -61,3 +63,9 @@
     </form>
     
 @endsection
+
+<script>
+    
+
+
+</script>
