@@ -77,47 +77,30 @@ class WxNew extends Controller
                 $biaoti=array_column($new,'n_bt');
                 $bt=implode(",",$biaoti);
 
-                $a="新闻有：".$bt."。这几个标题";
-                $xiaoxi='<xml>
-                    <ToUserName><![CDATA['.$openid.']]></ToUserName>
-                    <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
-                    <CreateTime>'.time().'</CreateTime>
-                    <MsgType><![CDATA[text]]></MsgType>
-                    <Content><![CDATA['.$a.']]></Content>
-                </xml>';
-              echo $xiaoxi;
+                $Content="新闻有：".$bt."。这几个标题";
+                Wechat::echomsg($openid,$ToUserName,$Content);
             }elseif($Content=='最新新闻'){
                 $n=News::orderBy('n_time','desc')->first();
-                $nn="新闻标题:".$n->n_bt."\n"."新闻内容:".$n->n_nr."\n"."新闻作者:".$n->n_zz;
+                $Content="新闻标题:".$n->n_bt."\n"."新闻内容:".$n->n_nr."\n"."新闻作者:".$n->n_zz;
                 
-                $xiaoxi='<xml>
-                    <ToUserName><![CDATA['.$openid.']]></ToUserName>
-                    <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
-                    <CreateTime>'.time().'</CreateTime>
-                    <MsgType><![CDATA[text]]></MsgType>
-                    <Content><![CDATA['.$nn.']]></Content>
-                </xml>';
-                echo $xiaoxi;
-            }elseif(mb_strpos($Content,"新闻") !==false){
-                
+                Wechat::echomsg($openid,$ToUserName,$Content);
+            }elseif(mb_strpos($Content,"新闻")!==false){
                 $new=rtrim($Content,"新闻");
-                $bt=News::where([['n_bt','like',"%$new%"]])->get();
-                // dd($bt);
-                if($new){
-                    $nr="";
+
+                $bt=News::where([['n_bt','like',"%$new%"]])->get()->toArray();
+                
+                if(!empty($bt)){
+                    $Content="";
                     foreach ($bt as $v){
-                        News::where('n_id',$v->n_id)->increment('n_num');
-                        $nr="新闻标题:".$v->n_bt."\n"."新闻内容:".$v->n_nr."\n"."新闻作者:".$v->n_zz;
+                        News::where('n_id',$v['n_id'])->increment('n_num');
+                        $Content="新闻标题:".$v['n_bt']."\n"."新闻内容:".$v['n_nr']."\n"."新闻作者:".$v['n_zz'];
                     }
 
-                    $xiaoxi='<xml>
-                        <ToUserName><![CDATA['.$openid.']]></ToUserName>
-                        <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
-                        <CreateTime>'.time().'</CreateTime>
-                        <MsgType><![CDATA[text]]></MsgType>
-                        <Content><![CDATA['.$nr.']]></Content>
-                    </xml>';
-                echo $xiaoxi;
+                    Wechat::echomsg($openid,$ToUserName,$Content);
+
+                }else{
+                    $Content="无新闻";
+                    Wechat::echomsg($openid,$ToUserName,$Content);
                 }
             }
         }

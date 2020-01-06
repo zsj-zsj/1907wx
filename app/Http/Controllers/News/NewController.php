@@ -13,7 +13,7 @@ class NewController extends Controller
     public function  index(){
         $where=[];
         $n_zz=request()->n_zz;
-        if($n_zz){
+        if(!empty($n_zz)||$n_zz=='0'){
             $where[]=['n_zz','=',"$n_zz"];
         }
         $n_bt=request()->n_bt;
