@@ -49,6 +49,9 @@ Route::prefix('/admin')->group(function(){
 
 
 
+
+
+//练习
 Route::get('newcreate','News\NewController@create');
 Route::post('newstore','News\NewController@store');
 Route::get('newindex','News\NewController@index');

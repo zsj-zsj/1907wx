@@ -79,8 +79,8 @@ class WxNew extends Controller
 
                 $a="新闻有：".$bt."。这几个标题";
                 $xiaoxi='<xml>
-                    <ToUserName><![CDATA[toUser]]></ToUserName>
-                    <FromUserName><![CDATA[fromUser]]></FromUserName>
+                    <ToUserName><![CDATA['.$openid.']]></ToUserName>
+                    <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
                     <CreateTime>'.time().'</CreateTime>
                     <MsgType><![CDATA[text]]></MsgType>
                     <Content><![CDATA['.$a.']]></Content>
@@ -91,8 +91,8 @@ class WxNew extends Controller
                 $nn="新闻标题:".$n->n_bt."\n"."新闻内容:".$n->n_nr."\n"."新闻作者:".$n->n_zz;
                 
                 $xiaoxi='<xml>
-                    <ToUserName><![CDATA[toUser]]></ToUserName>
-                    <FromUserName><![CDATA[fromUser]]></FromUserName>
+                    <ToUserName><![CDATA['.$openid.']]></ToUserName>
+                    <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
                     <CreateTime>'.time().'</CreateTime>
                     <MsgType><![CDATA[text]]></MsgType>
                     <Content><![CDATA['.$nn.']]></Content>
@@ -111,8 +111,8 @@ class WxNew extends Controller
                     }
 
                     $xiaoxi='<xml>
-                        <ToUserName><![CDATA[toUser]]></ToUserName>
-                        <FromUserName><![CDATA[fromUser]]></FromUserName>
+                        <ToUserName><![CDATA['.$openid.']]></ToUserName>
+                        <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
                         <CreateTime>'.time().'</CreateTime>
                         <MsgType><![CDATA[text]]></MsgType>
                         <Content><![CDATA['.$nr.']]></Content>
