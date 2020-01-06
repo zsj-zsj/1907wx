@@ -60,6 +60,7 @@ Route::post('newupdate/{n_id}','News\NewController@update');
 
 
 Route::get('wxnew','News\WxNew@checkSignature');
+Route::post('wxnew','News\WxNew@WxNew');
 
 
 
