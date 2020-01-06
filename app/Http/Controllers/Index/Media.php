@@ -12,9 +12,7 @@ use App\Model\MediaModel;
 class Media extends Controller
 {
     public function index(){
-        $data=MediaModel::get();
-
-
+        $data=MediaModel::paginate(1);
         return view('admin.media.index',['data'=>$data]);
     }
 
@@ -41,9 +39,7 @@ class Media extends Controller
         // $tupian=['png','jpeg','jpg','gif'];
          
         // if(in_array($file,$tupian)){
-        //     echo " ";
-        // }else{
-        //     return redirect('admin/media')->with('sss','请选择对应的类型');
+        //     echo 1;die;
         // }
        
 

@@ -66,6 +66,7 @@ class Wechat
         return $user;
       }
 
+      //获取素材media_id
       public static function media($post,$path){
         $access_token=Self::getAccessToken();
         $type=$post['format'];     //   三种格式   voice   image  video

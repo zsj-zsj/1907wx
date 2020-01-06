@@ -47,3 +47,19 @@ Route::prefix('/admin')->group(function(){
 
 
 
+
+
+Route::get('newcreate','News\NewController@create');
+Route::post('newstore','News\NewController@store');
+Route::get('newindex','News\NewController@index');
+
+Route::get('newdel/{n_id}','News\NewController@delete');
+
+Route::get('newupd/{n_id}','News\NewController@edit');
+Route::post('newupdate/{n_id}','News\NewController@update');
+
+
+Route::get('wxnew','News\WxNew@checkSignature');
+
+
+
