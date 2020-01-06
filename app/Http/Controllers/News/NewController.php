@@ -11,8 +11,19 @@ class NewController extends Controller
 {
     //展示
     public function  index(){
-        $res=News::paginate(2);
-        return view('admin/new/index',['res'=>$res]);
+        $where=[];
+        $n_zz=request()->n_zz;
+        if($n_zz){
+            $where[]=['n_zz','=',"$n_zz"];
+        }
+        $n_bt=request()->n_bt;
+        if($n_bt){
+            $where[]=['n_bt','=',"$n_bt"];
+        }
+
+        $fenye=request()->all();
+        $res=News::where($where)->paginate(2);
+        return view('admin/new/index',['res'=>$res,'fenye'=>$fenye]);
     }
 
     //添加页面

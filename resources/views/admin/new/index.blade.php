@@ -3,6 +3,15 @@
 @section('sidebar')
 @section('content')
 
+<a href="{{url('newcreate')}}">添加</a>
+
+<form action="">
+
+    <input type="text" name="n_zz" value="{{$fenye['n_zz']??''}}">作者  <br>
+    <input type="text" name="n_bt" value="{{$fenye['n_bt']??''}}">标题  <br>
+    <button>搜索</button>
+</form>
+
 
 <table border="1">
     <tr>
@@ -29,6 +38,6 @@
     </tr>
     @endforeach
 </table>
-{{$res->links()}}
+{{$res->appends($fenye)->links()}}
 
 @endsection
