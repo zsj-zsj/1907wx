@@ -28,7 +28,7 @@ class WxNew extends Controller
 
     public function WxNew(){
         $file=file_get_contents("php://input");
-        $date=date('Y-m-d H:i:s').$file;
+        $data=date('Y-m-d H:i:s').$file;
         file_put_contents('new.log',$data,FILE_APPEND);
         $xml=simplexml_load_string($file);
     }
