@@ -79,6 +79,16 @@ class WxController extends Controller
           }
         }
         
+        if($Event=='unsubscribe'){
+          $u=WxUserModel::where('openid','=',$openid)->get('channel_status')->first()->toArray();
+          Ticket::where('channel_status','=',$u)->decrement('num');
+
+          echo $delete=WxUserModel::where('openid','=',$openid)->delete();
+
+        }
+
+
+
         //  判断消息类型   回复消息  
         $student=["1","2","3","4","5"];
         if($MsgType=='text'){
