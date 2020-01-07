@@ -3,6 +3,7 @@
 namespace App\Tools;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use App\Tools\Curl;
 
 class Wechat 
 {
@@ -83,6 +84,22 @@ class Wechat
         // dd($json);
         // $post=$json['media_id'];
         return $json;
+      }
+
+      public static function ewm($channel_status){
+        $access_token=Self::getAccessToken();
+        // dd($access_token);
+        $url='https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.$access_token;  //地址
+  
+        $Post='{"expire_seconds": 604800, "action_name": "QR_STR_SCENE", "action_info": {"scene": {"scene_str": "'.$channel_status.'"}}}';   //参数
+   
+        $res=Curl::CurlPost($url,$Post);   //post请求  掉方法  
+        $json=json_decode($res,true);
+        $ticket=$json['ticket'];
+        $tck=UrlEncode($ticket);
+        $tickets='https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$tck;
+        // return redirect($tickets);   返回一个二维码
+        return $tickets;
       }
       
 }

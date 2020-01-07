@@ -84,9 +84,14 @@ class WxNew extends Controller
                 $Content="新闻标题:".$n->n_bt."\n"."新闻内容:".$n->n_nr."\n"."新闻作者:".$n->n_zz;
                 
                 Wechat::echomsg($openid,$ToUserName,$Content);
-            }elseif(mb_strpos($Content,"新闻")!==false){
+            }elseif(mb_strpos($Content,"新闻")!==false){          //搜索  库里的标题字段  新闻
                 $new=rtrim($Content,"新闻");
 
+            // }elseif(mb_strpos($Content,"新闻+")!==false){          新闻+库里标题内容
+            //     $new=mb_substr($Content,3);
+
+            // }elseif(mb_strpos($Content,"新闻+")!==false){
+            //     $new=ltrim($Content,"新闻+");         这个搜索    新闻+库里标题内容
                 $bt=News::where([['n_bt','like',"%$new%"]])->get()->toArray();
                 
                 if(!empty($bt)){
@@ -95,8 +100,9 @@ class WxNew extends Controller
                         News::where('n_id',$v['n_id'])->increment('n_num');
                         $Content="新闻标题:".$v['n_bt']."\n"."新闻内容:".$v['n_nr']."\n"."新闻作者:".$v['n_zz'];
                     }
-
-                    Wechat::echomsg($openid,$ToUserName,$Content);
+                    //如果  $bt=News::where([['n_bt','like',"%$new%"]])->first()->toArray();  就不用循环 直接写
+                    //News::where('n_id',$v['n_id'])->increment('n_num');
+                     Wechat::echomsg($openid,$ToUserName,$Content);
 
                 }else{
                     $Content="无新闻";

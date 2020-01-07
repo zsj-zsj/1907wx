@@ -67,6 +67,21 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa fa-bar-chart-o"></i>
+                                <span class="nav-label">渠道管理</span>
+                                <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="{{url('admin/ticket')}}">渠道添加</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="{{url('admin/ticketindex')}}">渠道展示</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>

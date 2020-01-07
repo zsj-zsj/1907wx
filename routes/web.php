@@ -25,6 +25,7 @@ Route::post('wx','Wx\WxController@wxdo');
 
 
 
+
 //后台
 Route::get('login','Login\Login@login'); //登录页面
 Route::get('reg','Login\Login@reg');   //注册页面
@@ -43,6 +44,10 @@ Route::prefix('/admin')->group(function(){
     Route::post('domedia','Index\Media@store');    //执行添加
     Route::get('medialist','Index\Media@index');      //素材展示
 
+    //渠道管理
+    Route::get('ticket','Index\Ticket@create');      //展示 
+    Route::post('addticket','Index\Ticket@store');
+    Route::get('ticketindex','Index\Ticket@index'); 
 });
 
 

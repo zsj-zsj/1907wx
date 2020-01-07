@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use App\Model\WxUserModel;  //用户
 use App\Model\MediaModel;   //素材
 
+use GuzzleHttp\Client;
+use App\Tools\Curl;
+
+use App\Model\Ticket;
 //微信公共方法
 use App\Tools\Wechat;
 
@@ -50,26 +54,27 @@ class WxController extends Controller
    
 
         $user=Wechat::getUserInfoByOpenid($openid);         //调用的方法  获取的用户信息是数组 返回要等于 
-
-        $data=[
-          'nickname'=>$user['nickname'],
-          'sex'=>$user['sex'],
-          'head'=>$user['headimgurl'],
-          'openid'=>$user['openid'],
-          'time'=>$user['subscribe_time'],
-          'city'=>$user['city'],
-        ];
-
-        // dd($data);
-        // echo 1;
+        // dd($user);
         $u=WxUserModel::where('openid','=',$openid)->first();
-        // echo 2;
-        // dd($u);
+        
+        //关注事件
         if($Event=='subscribe'){
           if($u){
             Wechat::echomsg($openid,$ToUserName,"欢迎回来");
           }else{
+            $data=[
+              'nickname'=>$user['nickname'],
+              'sex'=>$user['sex'],
+              'head'=>$user['headimgurl'],
+              'openid'=>$user['openid'],
+              'time'=>$user['subscribe_time'],
+              'city'=>$user['city'],
+              'channel_status'=>$user['qr_scene_str']
+            ];
+            $eventKey=$xml->EventKey;
+            $channel_status=$user['qr_scene_str'];
             $u=WxUserModel::insert($data);
+            Ticket::where('channel_status','=',$channel_status)->increment('num');
             Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s').'：欢迎关注~@'.$user['nickname']);
           }
         }
@@ -140,7 +145,6 @@ class WxController extends Controller
           </xml>';
           echo $voice;
         }
-      
     }
 
 }
