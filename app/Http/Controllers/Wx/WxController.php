@@ -55,13 +55,13 @@ class WxController extends Controller
 
         $user=Wechat::getUserInfoByOpenid($openid);         //调用的方法  获取的用户信息是数组 返回要等于 
         // dd($user);
-        $u=WxUserModel::where('openid','=',$openid)->first();
+        // $u=WxUserModel::where('openid','=',$openid)->first();  //根据openid 查一条 
         
         //关注事件
         if($Event=='subscribe'){
-          if($u){
-            Wechat::echomsg($openid,$ToUserName,"欢迎回来");
-          }else{
+          // if($u){
+          //   Wechat::echomsg($openid,$ToUserName,"欢迎回来");
+          // }else{
             $data=[
               'nickname'=>$user['nickname'],
               'sex'=>$user['sex'],
@@ -76,14 +76,14 @@ class WxController extends Controller
             $u=WxUserModel::insert($data);
             Ticket::where('channel_status','=',$channel_status)->increment('num');
             Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s').'：欢迎关注~@'.$user['nickname']);
-          }
+          // }
         }
         
         if($Event=='unsubscribe'){
           $u=WxUserModel::where('openid','=',$openid)->get('channel_status')->first()->toArray();
           Ticket::where('channel_status','=',$u)->decrement('num');
 
-          echo $delete=WxUserModel::where('openid','=',$openid)->delete();
+          $delete=WxUserModel::where('openid','=',$openid)->delete();
 
         }
 
