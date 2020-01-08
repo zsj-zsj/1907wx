@@ -58,10 +58,7 @@ class WxController extends Controller
         $u=WxUserModel::where('openid','=',$openid)->first();  //根据openid 查一条 
         // dd($u);
         
-
         // channel_status 标识          接 标识 的字段 qr_scene_str   他俩一样  判断
-
-             
 
         //关注事件
         if($Event=='subscribe'){
@@ -70,7 +67,7 @@ class WxController extends Controller
             $channel_status=$user['qr_scene_str']; 
             WxUserModel::where('openid','=',$openid)->update(['is_del'=>1]);
             Ticket::where('channel_status','=',$channel_status)->increment('num');
-            Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s').'：欢迎关注~@'.$user['nickname']);
+            Wechat::echomsg($openid,$ToUserName,"欢迎回来");
           }else{
             $data=[                //入库的数据
               'nickname'=>$user['nickname'],
