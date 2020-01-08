@@ -59,13 +59,13 @@ class WxController extends Controller
         // dd($u);
         
         // channel_status 标识          接 标识 的字段 qr_scene_str   他俩一样  判断
-
+        
         //关注事件
         if($Event=='subscribe'){
           if($u){
             $eventKey=$xml->EventKey;         //接受 <EventKey><![CDATA[qrscene_222]]></EventKey>  类型   
             $channel_status=$user['qr_scene_str']; 
-            WxUserModel::where('openid','=',$openid)->update(['is_del'=>1]);
+            WxUserModel::where('openid','=',$openid)->update(['is_del'=>1,'channel_status'=>$channel_status]);
             Ticket::where('channel_status','=',$channel_status)->increment('num');
             Wechat::echomsg($openid,$ToUserName,"欢迎回来");
           }else{
@@ -91,10 +91,9 @@ class WxController extends Controller
           //根据openid 查一列 的一个字段 
           $u=WxUserModel::where('openid','=',$openid)->get('channel_status')->first()->toArray();    
           Ticket::where('channel_status','=',$u)->decrement('num');    //自减
-          WxUserModel::where('openid','=',$openid)->update(['is_del'=>2]);
+          WxUserModel::where('openid','=',$openid)->update(['is_del'=>2]); 
           // $delete=WxUserModel::where('openid','=',$openid)->delete();
         }
-
 
 
         //  判断消息类型   回复消息  
