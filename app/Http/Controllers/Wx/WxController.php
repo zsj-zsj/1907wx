@@ -57,29 +57,33 @@ class WxController extends Controller
         // dd($user);
         $u=WxUserModel::where('openid','=',$openid)->first();  //根据openid 查一条 
         // dd($u);
-        $data=[                //入库的数据
-          'nickname'=>$user['nickname'],
-          'sex'=>$user['sex'],
-          'head'=>$user['headimgurl'],
-          'openid'=>$user['openid'],       
-          'time'=>$user['subscribe_time'],
-          'city'=>$user['city'],
-          'channel_status'=>$user['qr_scene_str'],
-          'is_del'=>1     //关注是1
-        ];
+        
 
         // channel_status 标识          接 标识 的字段 qr_scene_str   他俩一样  判断
 
-        $eventKey=$xml->EventKey;         //接受 <EventKey><![CDATA[qrscene_222]]></EventKey>  类型   
-        $channel_status=$user['qr_scene_str'];      
+             
 
         //关注事件
         if($Event=='subscribe'){
           if($u){
+            $eventKey=$xml->EventKey;         //接受 <EventKey><![CDATA[qrscene_222]]></EventKey>  类型   
+            $channel_status=$user['qr_scene_str']; 
             WxUserModel::where('openid','=',$openid)->update(['is_del'=>1]);
             Ticket::where('channel_status','=',$channel_status)->increment('num');
             Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s').'：欢迎关注~@'.$user['nickname']);
           }else{
+            $data=[                //入库的数据
+              'nickname'=>$user['nickname'],
+              'sex'=>$user['sex'],
+              'head'=>$user['headimgurl'],
+              'openid'=>$user['openid'],       
+              'time'=>$user['subscribe_time'],
+              'city'=>$user['city'],
+              'channel_status'=>$user['qr_scene_str'],
+              'is_del'=>1     //关注是1
+            ];
+            $eventKey=$xml->EventKey;         //接受 <EventKey><![CDATA[qrscene_222]]></EventKey>  类型   
+            $channel_status=$user['qr_scene_str']; 
             $u=WxUserModel::insert($data);
             Ticket::where('channel_status','=',$channel_status)->increment('num');
             Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s').'：欢迎关注~@'.$user['nickname']);
@@ -90,7 +94,7 @@ class WxController extends Controller
           //根据openid 查一列 的一个字段 
           $u=WxUserModel::where('openid','=',$openid)->get('channel_status')->first()->toArray();    
           Ticket::where('channel_status','=',$u)->decrement('num');    //自减
-          $update=WxUserModel::where('openid','=',$openid)->update(['is_del'=>2]);
+          WxUserModel::where('openid','=',$openid)->update(['is_del'=>2]);
           // $delete=WxUserModel::where('openid','=',$openid)->delete();
         }
 
