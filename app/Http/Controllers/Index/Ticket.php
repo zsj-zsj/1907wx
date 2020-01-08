@@ -38,4 +38,21 @@ class Ticket extends Controller
         $res=TicketModel::create($data);
         return redirect('admin/ticketindex');
     }
+
+
+    public function table(){
+        $data=TicketModel::select('channel_status','num')->get()->toArray();
+        
+        $num="";
+        $channel_status="";
+        foreach($data as $v){
+            $channel_status .="'".$v['channel_status']."',";
+            $num .=$v['num'].",";
+        }
+        // dd($num);
+        //  $channel_status=rtrim($channel_status,',');
+         $channel_status=substr($channel_status,0,-1);
+        
+        return view('admin/ticket/table',['channel_status'=>$channel_status,'num'=>$num]);
+    }
 }

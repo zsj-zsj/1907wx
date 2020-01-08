@@ -46,9 +46,10 @@ Route::prefix('/admin')->group(function(){
 
     //渠道管理
     Route::get('ticket','Index\Ticket@create');      //展示 
-    Route::post('addticket','Index\Ticket@store');
-    Route::get('ticketindex','Index\Ticket@index'); 
-});
+    Route::post('addticket','Index\Ticket@store');   //执行添加
+    Route::get('ticketindex','Index\Ticket@index');  //列表
+    Route::get('table','Index\Ticket@table');        //统计图
+}); 
 
 
 

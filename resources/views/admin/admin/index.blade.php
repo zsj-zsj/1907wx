@@ -80,6 +80,9 @@
                             <li>
                                 <a class="J_menuItem" href="{{url('admin/ticketindex')}}">渠道展示</a>
                             </li>
+                            <li>
+                                <a class="J_menuItem" href="{{url('admin/table')}}">统计表</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
