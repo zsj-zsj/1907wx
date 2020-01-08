@@ -91,8 +91,18 @@ class Wechat
         // dd($access_token);
         $url='https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.$access_token;  //地址
   
-        $Post='{"expire_seconds": 604800, "action_name": "QR_STR_SCENE", "action_info": {"scene": {"scene_str": "'.$channel_status.'"}}}';   //参数
+        // $Post='{"expire_seconds": 604800, "action_name": "QR_STR_SCENE", "action_info": {"scene": {"scene_str": "'.$channel_status.'"}}}';   //参数
    
+        $Post=[
+          'expire_seconds'=>604800,
+          'action_name'=>'QR_STR_SCENE',
+          'action_info'=>[
+            'scene'=>[
+              'scene_str'=>$channel_status
+            ]
+          ]
+            ];
+          $Post=json_encode($Post,JSON_UNESCAPED_UNICODE);
         $res=Curl::CurlPost($url,$Post);   //post请求  掉方法  
         $json=json_decode($res,true);
         $ticket=$json['ticket'];

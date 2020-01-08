@@ -2,7 +2,7 @@
 @section('title', '素材--添加')
 @section('sidebar')
 @section('content')
-<h1><a href="{{url('admin/index')}}">主页</a></h1>
+<a href="{{url('admin/medialist')}}">展示</a>
     <h3 style="text-align:center"  >素材添加</h3>   
     <form class="form-horizontal" action="{{url('admin/domedia')}}" method="post" role="form" enctype="multipart/form-data">
         @csrf

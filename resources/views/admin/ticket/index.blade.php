@@ -2,7 +2,7 @@
 @section('title', '素材--展示')
 @section('sidebar')
 @section('content')
-<h1><a href="{{url('admin/index')}}">主页</a></h1>
+{{-- <h1><a href="{{url('admin/index')}}">主页</a></h1> --}}
 <h3 style="text-align:center"  >渠道展示</h3>
 <a href="{{url('admin/ticket')}}">添加</a>   
 <table class="table table-hover table-bordered">
