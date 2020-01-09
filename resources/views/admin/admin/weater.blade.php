@@ -37,7 +37,14 @@
                     if(city==""){
                         city="北京";
                     }
-                    
+
+
+                    // var reg = /^[a-zA-Z]+$|^[\u4e00-\u9fa5]+$/;
+                    // if(!reg.test(city)){
+                    //     alert('城市名只能为拼音和汉字');
+                    //     return;
+                    // }
+
                     $.ajax({
                         method:"get",
                         data:{city:city},
@@ -45,9 +52,16 @@
                         dataType:"json",
                         success:function(res){
                             console.log(res);
+                            if(res.success==0){
+                                alert('请输入存在的城市，默认是北京天气');
+                                return;
+                            }
                             suibianqide(res.result);
                         }
                     })
+
+                    
+                    
             })
              function suibianqide(res){
                     // console.log(res);
