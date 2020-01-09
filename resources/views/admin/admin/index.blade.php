@@ -47,7 +47,7 @@
                         <span class="ng-scope">分类</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="{{url('admin/zhanshi')}}">
+                        <a class="J_menuItem" href="{{url('admin/weater')}}">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">主页</span>
                         </a>
@@ -180,7 +180,7 @@
                 </nav>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe id="J_iframe" width="100%" height="100%" src="{{url('admin/zhanshi')}}" frameborder="0" data-id="index_v1.html" seamless></iframe>
+                <iframe id="J_iframe" width="100%" height="100%" src="{{url('admin/weater')}}" frameborder="0" data-id="index_v1.html" seamless></iframe>
             </div>
         </div>
         <!--右侧部分结束-->
@@ -198,7 +198,7 @@
     <script type="text/javascript" src="/admin/js/index.js"></script>
 
     <!-- 第三方插件 -->
-    <script src="/admin/js/plugins/pace/pace.min.js"></script>
+    {{-- <script src="/admin/js/plugins/pace/pace.min.js"></script> --}}
 <div style="text-align:center;">
 <p>来源:<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
 </div>

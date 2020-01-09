@@ -19,7 +19,8 @@
                 text: '粉丝统计表'                 // 标题
             },
             xAxis: {
-                categories: [<?php echo $channel_status;?> ]  // x 轴分类
+                // categories: [<?php echo $channel_status;?> ]  // x 轴分类
+                categories: [ {!!$channel_status!!} ]  // x 轴分类
             },
             yAxis: {
                 title: {
@@ -28,7 +29,8 @@
             },
             series: [{                              // 数据列
                 name: '粉丝人数',                        // 数据列名
-                data: [ <?php echo $num;?> ]                     // 数据
+                // data: [ <?php echo $num;?> ]                     // 数据
+                data: [ {!!$num!!} ]                     // 数据
             }]
         };
         // 图表初始化函数

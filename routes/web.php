@@ -37,8 +37,8 @@ Route::post('dologin','Login\Login@dologin'); //执行登录
 Route::prefix('/admin')->group(function(){
     //主页
     Route::get('index','Index\Index@index');  //展示主页
-    Route::get('zhanshi','Index\Index@zhanshi');  //主页中间部分
-
+    Route::get('weater','Index\Index@weater');  //展示主页
+    Route::get('getWeater','Index\Index@getWeater');  //展示主页
     //素材管理
     Route::get('media','Index\Media@create');      //展示素材添加
     Route::post('domedia','Index\Media@store');    //执行添加
