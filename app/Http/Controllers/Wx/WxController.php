@@ -164,4 +164,46 @@ class WxController extends Controller
         }
     }
 
-}
+
+    public function menu(){
+      $access_token=Wechat::getAccessToken();
+      $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$access_token;
+      
+      $menu=[
+        'button'=>[
+          [
+            'type'=>'click',
+            'name'=>'点我',
+            'key'=>'asdffg'
+          ]
+        ],
+        [
+          [
+            'name'=>'菜单',
+            'sub_button'=>[
+              [
+                'type'=>'view',
+                'name'=>'视图',
+                'url'=>'http://www.soso.com/'
+              ],
+              [
+                'type'=>'scancode_waitmsg',
+                'name'=>'扫码',
+                'key'=>'rselfmenu_0_0'
+              ],
+              [
+                'type'=>'pic_sysphoto',
+                'name'=>'拍照',
+                'key'=>'uytyr'
+              ]
+            ]
+          ]  
+        ]
+      ];
+      $json=json_encode($menu,JSON_UNESCAPED_UNICODE);
+      $menuget=Curl::CurlPost($url,$json);
+      echo $menuget;
+    }
+
+
+  }

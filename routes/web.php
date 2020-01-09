@@ -22,16 +22,13 @@ Route::get('phpinfo',function(){
 //微信
 Route::get('wx','Wx\WxController@checkSignature');
 Route::post('wx','Wx\WxController@wxdo');
-
-
-
+Route::get('menu','Wx\WxController@menu');    //菜单
 
 //后台
 Route::get('login','Login\Login@login'); //登录页面
 Route::get('reg','Login\Login@reg');   //注册页面
 Route::post('doreg','Login\Login@doreg');   //执行注册
 Route::post('dologin','Login\Login@dologin'); //执行登录
-
 
 
 Route::prefix('/admin')->group(function(){
