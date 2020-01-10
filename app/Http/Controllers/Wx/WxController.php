@@ -172,6 +172,7 @@ class WxController extends Controller
       $access_token=Wechat::getAccessToken();
       $url='https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$access_token.'&media_id='.$MediaId;
       $img=file_get_contents($url);
+
       if($MsgType=='image'){
         $imgname=date('YmdHis').rand(111,999).'.jpg';
         $imgurl='material/img/'.$imgname;
@@ -236,5 +237,29 @@ class WxController extends Controller
 
     }
 
+
+    public function semdAllOpenid(){
+      $user=WxUserModel::get()->toArray();
+      $openid=array_column($user,'openid');
+      // dd($openid);
+
+      $data=[
+          'touser'=>$openid,
+            'msgtype'=>'text',
+            'text'=>[
+              'content'=>date('Y-m-d H:i:s')."大家好"
+            ]
+      ];
+      // dd($data);
+      $datas=json_encode($data);
+      // dd($datas);
+
+      $access_token=Wechat::getAccessToken();
+      $url='https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token='.$access_token;
+
+      $send=Curl::CurlPost($url,$datas);
+
+      echo $send;
+    }
 
   }

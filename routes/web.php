@@ -24,7 +24,8 @@ Route::get('wx','Wx\WxController@checkSignature');
 Route::post('wx','Wx\WxController@wxdo');
 Route::get('menu','Wx\WxController@menu');    //菜单
 
-Route::get('downloadImg','Wx\WxController@downloadImg');    //菜单
+Route::get('downloadImg','Wx\WxController@downloadImg');    //保存用户发过来的消息
+Route::get('semdAllOpenid','Wx\WxController@semdAllOpenid');    //保存用户发过来的消息
 
 //后台
 Route::get('login','Login\Login@login'); //登录页面
