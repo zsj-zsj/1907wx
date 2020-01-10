@@ -251,7 +251,7 @@ class WxController extends Controller
             ]
       ];
       // dd($data);
-      $datas=json_encode($data);
+      $datas=json_encode($data,JSON_UNESCAPED_UNICODE);
       // dd($datas);
 
       $access_token=Wechat::getAccessToken();
