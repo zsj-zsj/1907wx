@@ -132,6 +132,8 @@ class WxController extends Controller
             Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content);
           }
         }elseif($MsgType=='image'){
+            $this->downloadImg($MediaId,$MsgType);       //调方法  保存用户发过来的素材
+
             $img=MediaModel::where('format','=','image')->get();
             $sss=json_decode($img,true);
             
@@ -151,6 +153,7 @@ class WxController extends Controller
           </xml>';
           echo $image;
         }elseif($MsgType=='voice'){
+          $this->downloadImg($MediaId,$MsgType);       //调方法  保存用户发过来的素材
             $voice='<xml>
             <ToUserName><![CDATA['.$openid.']]></ToUserName>
             <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
@@ -161,48 +164,78 @@ class WxController extends Controller
             </Voice>
           </xml>';
           echo $voice;
+        }elseif($MsgType=='video'){
+          $this->downloadImg($MediaId,$MsgType);       //调方法  保存用户发过来的素材
         }
     }
 
+    //保存图片     下载用户发送过来的图片
+    protected function downloadImg($MediaId,$MsgType){
+      $access_token=Wechat::getAccessToken();
+      $url='https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$access_token.'&media_id='.$MediaId;
+      $img=file_get_contents($url);
+      if($MsgType=='image'){
+        $imgname=date('YmdHis').rand(111,999).'.jpg';
+        $imgurl='material/img/'.$imgname;
+        file_put_contents($imgurl,$img);
+      }elseif($MsgType=='voice'){
+        $voicename=date('YmdHis').rand(111,999).'.amr';
+        $voiceurl='material/voice/'.$voicename;
+        file_put_contents($voiceurl,$img);
+      }elseif($MsgType=='video'){
+        $video=date('YmdHis').rand(111,999).'.mp4';
+        $videourl='material/video/'.$video;
+        file_put_contents($videourl,$img);
+      }
+    }
 
+
+    //创建菜单
     public function menu(){
       $access_token=Wechat::getAccessToken();
       $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$access_token;
       
       $menu=[
         'button'=>[
-          [
-            'type'=>'click',
-            'name'=>'点我',
-            'key'=>'asdffg'
+            [
+              'type'=>'location_select',
+              'name'=>'发送位置',
+              'key'=>'asdffg'
+            ],
+            [
+              'type'=>'scancode_waitmsg',
+              'name'=>'扫码',
+              'key'=>'rselfmenu_0_0'
+            ],
+        
+            [
+              'name'=>'菜单',
+              'sub_button'=>[
+                [
+                  'type'=>'view',
+                  'name'=>'视图',
+                  'url'=>'http://www.soso.com/'
+                ],
+                [
+                  'type'=>'scancode_waitmsg',
+                  'name'=>'扫码',
+                  'key'=>'rselfmenu_0_0'
+                ],
+                [
+                  'type'=>'pic_sysphoto',
+                  'name'=>'拍照',
+                  'key'=>'uytyr'
+                ]
+              ]     
           ]
-        ],
-        [
-          [
-            'name'=>'菜单',
-            'sub_button'=>[
-              [
-                'type'=>'view',
-                'name'=>'视图',
-                'url'=>'http://www.soso.com/'
-              ],
-              [
-                'type'=>'scancode_waitmsg',
-                'name'=>'扫码',
-                'key'=>'rselfmenu_0_0'
-              ],
-              [
-                'type'=>'pic_sysphoto',
-                'name'=>'拍照',
-                'key'=>'uytyr'
-              ]
-            ]
-          ]  
-        ]
+        ] 
       ];
       $json=json_encode($menu,JSON_UNESCAPED_UNICODE);
       $menuget=Curl::CurlPost($url,$json);
-      echo $menuget;
+      
+      $menus=json_decode($menuget,true);
+      dd($menus);
+
     }
 
 
