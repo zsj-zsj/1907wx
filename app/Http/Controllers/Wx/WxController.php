@@ -134,14 +134,11 @@ class WxController extends Controller
         }elseif($MsgType=='image'){
             $this->downloadImg($MediaId,$MsgType);       //调方法  保存用户发过来的素材
 
-            $img=MediaModel::where('format','=','image')->get();
-            $sss=json_decode($img,true);
-            
-            $aaa=array_column($sss,'media_id');
-            
-            $ll=array_rand($aaa);
-            // dd($ll);
-            $kkk=$aaa[$ll];
+            $img=MediaModel::where('format','=','image')->get();      //根据库里 format字段 查image类型
+            $sss=json_decode($img,true);             //转数组
+            $aaa=array_column($sss,'media_id');      // 去这个数组  media_id 这一列
+            $ll=array_rand($aaa);      //随机取
+            $kkk=$aaa[$ll];        //去这一列的键
             $image='<xml>
             <ToUserName><![CDATA['.$openid.']]></ToUserName>
             <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
@@ -168,6 +165,7 @@ class WxController extends Controller
           $this->downloadImg($MediaId,$MsgType);       //调方法  保存用户发过来的素材
         }
     }
+
 
     //保存图片     下载用户发送过来的图片
     protected function downloadImg($MediaId,$MsgType){
