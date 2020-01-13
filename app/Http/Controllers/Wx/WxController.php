@@ -273,9 +273,16 @@ class WxController extends Controller
 
     //获取  用户同意授权，获取code
     public function code(){
-      $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+      $redirect_uri=urlEncode('http://www.zsjshaojie.top/auth');
+      $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+      dd($url);
+
       $data=file_get_contents($url);
       echo $data;
+    }
+
+    public function auth(){
+
     }
 
 
