@@ -298,14 +298,20 @@ class WxController extends Controller
       $jsons=file_get_contents($urls);
       $arr=json_decode($jsons,true);      //用户信息
       print_r($arr);
+      echo "<hr>";
 
 
       //实现签到 记录用户签到
       $redis_key='checkin:'.date('Y-m-d');  //设置redis
       Redis::Zadd($redis_key,time(),$arr['openid']);   //将openid加入有序集合
       echo $arr['nickname']."~签到成功：".date('Y-m-d H:i:s');
+      echo "<hr>";
 
+      $userlist=Redis::zrange($redis_key,0,-1);
+      echo '<br>';
+      print($userlist);
 
+      
 
     }
 
