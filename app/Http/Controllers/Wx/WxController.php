@@ -17,6 +17,7 @@ use App\Tools\Wechat;
 
 class WxController extends Controller
 {
+    //连接测试号
     public function checkSignature()
     {
         $token = '12345678asdfgh';
@@ -37,6 +38,7 @@ class WxController extends Controller
         }
     }
 
+    //关注回复  图片语音视频
     public function wxdo(){
         $file=file_get_contents("php://input"); 
         $data=date('Y-m-d H:i:s').$file;
@@ -267,6 +269,16 @@ class WxController extends Controller
       $git="cd /data/wwwroot/default/weixin1907 && git pull ";
       shell_exec($git);
     }
+
+
+    //获取  用户同意授权，获取code
+    public function code(){
+      $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+      $data=file_get_contents($url);
+      echo $data;
+    }
+
+
 
 
 

@@ -30,6 +30,9 @@ Route::get('downloadImg','Wx\WxController@downloadImg');    //保存用户发过
 Route::get('semdAllOpenid','Wx\WxController@semdAllOpenid');    //保存用户发过来的消息
 
 
+Route::get('code','Wx\WxController@code');   //获取用户授权code 
+
+
 //后台
 Route::get('login','Login\Login@login'); //登录页面
 Route::get('reg','Login\Login@reg');   //注册页面
