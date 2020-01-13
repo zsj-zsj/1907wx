@@ -297,20 +297,31 @@ class WxController extends Controller
       $urls='https://api.weixin.qq.com/sns/userinfo?access_token='.$data['access_token'].'&openid='.$data['openid'].'&lang=zh_CN';
       $jsons=file_get_contents($urls);
       $arr=json_decode($jsons,true);      //用户信息
+
+      //将用户信息存入redis HASH 中
+      $key='h:userinfo:'.$arr['openid'];
+      Redis::hMset($key,$arr);
+
       print_r($arr);
       echo "<hr>";
 
-
+    
       //实现签到 记录用户签到
       $redis_key='checkin:'.date('Y-m-d');  //设置redis
       Redis::Zadd($redis_key,time(),$arr['openid']);   //将openid加入有序集合
       echo $arr['nickname']."~签到成功：".date('Y-m-d H:i:s');
       echo "<hr>";
 
-      $userlist=Redis::zrange($redis_key,0,-1);
+      $userlist=Redis::zrange($redis_key,0,-1);     //redis 存入的openid
       echo '<br>';
       print_r($userlist);
 
+
+      foreach($userlist as $k=>$v){
+        $key='h:userinfo:'.$v;
+        $u=Redis::hGetAll($key);
+        print_r($u);
+      }
 
 
     }
