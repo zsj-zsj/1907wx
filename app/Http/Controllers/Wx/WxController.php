@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Wx;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
+
 
 use App\Model\WxUserModel;  //用户
 use App\Model\MediaModel;   //素材
@@ -196,6 +198,7 @@ class WxController extends Controller
       $access_token=Wechat::getAccessToken();
       $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$access_token;
       
+
       $menu=[
         'button'=>[
             [
@@ -214,8 +217,8 @@ class WxController extends Controller
               'sub_button'=>[
                 [
                   'type'=>'view',
-                  'name'=>'视图',
-                  'url'=>'http://www.soso.com/'
+                  'name'=>'签到',
+                  'url'=>'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.urlEncode('http://www.zsjshaojie.top/auth').'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
                 ],
                 [
                   'type'=>'scancode_waitmsg',
@@ -273,6 +276,9 @@ class WxController extends Controller
 
     //获取  用户同意授权，获取code
     public function code(){
+      $redis_key='checkin:'.date('Y-m-d');   //测试  看看存了个什么  
+      // echo $redis_key;die;
+
       $redirect_uri=urlEncode('http://www.zsjshaojie.top/auth');
       $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
       // dd($url);
@@ -290,8 +296,16 @@ class WxController extends Controller
       //拉取用户信息
       $urls='https://api.weixin.qq.com/sns/userinfo?access_token='.$data['access_token'].'&openid='.$data['openid'].'&lang=zh_CN';
       $jsons=file_get_contents($urls);
-      $arr=json_decode($jsons,true);
+      $arr=json_decode($jsons,true);      //用户信息
       dd($arr);
+
+
+      //实现签到 记录用户签到
+      $redis_key='checkin:'.date('Y-m-d');  //设置redis
+      Redis::Zadd($redis_key,time(),$arr['openid']);   //将openid加入有序集合
+      echo $arr['nickname']."~签到成功：".date('Y-m-d H:i:s');
+
+
     }
 
 
