@@ -280,11 +280,18 @@ class WxController extends Controller
     }
 
     public function auth(){
+      //通过code换取网页授权access_token
       $code=$_GET['code'];
       $url='https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('APPID').'&secret='.env('APPSECRET').'&code='.$code.'&grant_type=authorization_code';
       $json=file_get_contents($url);
       $data=json_decode($json,true);
-      dd($data);
+      // dd($data);
+
+      //拉取用户信息
+      $urls='https://api.weixin.qq.com/sns/userinfo?access_token='.$data['access_token'].'&openid='.$data['openid'].'&lang=zh_CN';
+      $jsons=file_get_contents($urls);
+      $arr=json_decode($jsons,true);
+      dd($arr);
     }
 
 
