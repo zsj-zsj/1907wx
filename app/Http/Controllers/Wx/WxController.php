@@ -309,9 +309,9 @@ class WxController extends Controller
 
       $userlist=Redis::zrange($redis_key,0,-1);
       echo '<br>';
-      print($userlist);
+      print_r($userlist);
 
-      
+
 
     }
 
