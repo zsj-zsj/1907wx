@@ -317,9 +317,10 @@ class WxController extends Controller
       print_r($userlist);
 
 
-      foreach($userlist as $k=>$v){
-        $key='h:userinfo:'.$v;
-        $u=Redis::hGetAll($key);
+      foreach($userlist as $k=>$v){    //$v 是openid
+        $key='h:userinfo:'.$v;          //拼接openid        
+        $u=Redis::hGetAll($key);      //取 存    返回所有的 键 值
+        echo "<img src='".$u['headimgurl']."'>";
         print_r($u);
       }
 
