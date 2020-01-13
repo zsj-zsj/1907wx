@@ -275,13 +275,13 @@ class WxController extends Controller
     public function code(){
       $redirect_uri=urlEncode('http://www.zsjshaojie.top/auth');
       $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
-      dd($url);
-
-      $data=file_get_contents($url);
-      echo $data;
+      // dd($url);
+     
+      echo $url;
     }
 
     public function auth(){
+      $code=$_GET['code'];
 
     }
 

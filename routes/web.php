@@ -31,6 +31,7 @@ Route::get('semdAllOpenid','Wx\WxController@semdAllOpenid');    //保存用户�
 
 
 Route::get('code','Wx\WxController@code');   //获取用户授权code 
+Route::get('auth','Wx\WxController@auth');   //接受code
 
 
 //后台
