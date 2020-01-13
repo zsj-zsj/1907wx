@@ -320,7 +320,13 @@ class WxController extends Controller
       foreach($userlist as $k=>$v){    //$v 是openid
         $key='h:userinfo:'.$v;          //拼接openid        
         $u=Redis::hGetAll($key);      //取 存    返回所有的 键 值
+
+        // if(empty($u)){     判断 为空 跳过 执行下面的
+        //   continue;
+        // }
+
         echo "<img src='".$u['headimgurl']."'>";
+        echo '<hr>';
         print_r($u);
       }
 
