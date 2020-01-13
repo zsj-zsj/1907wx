@@ -23,7 +23,7 @@ Route::get('phpinfo',function(){
 Route::get('wx','Wx\WxController@checkSignature');
 Route::post('wx','Wx\WxController@wxdo');
 Route::get('menu','Wx\WxController@menu');    //菜单
-Route::get('gitpull','Wx\WxController@gilPull');    //git自动拉取
+Route::any('gitpull','Wx\WxController@gilPull');    //git自动拉取
 
 Route::get('downloadImg','Wx\WxController@downloadImg');    //保存用户发过来的消息
 Route::get('semdAllOpenid','Wx\WxController@semdAllOpenid');    //保存用户发过来的消息
