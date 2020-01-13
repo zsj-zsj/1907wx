@@ -237,7 +237,7 @@ class WxController extends Controller
 
     }
 
-
+    //群发
     public function semdAllOpenid(){
       $user=WxUserModel::get()->toArray();
       $openid=array_column($user,'openid');
@@ -261,5 +261,13 @@ class WxController extends Controller
 
       echo $send;
     }
+
+    //git自动拉取
+    public function gilPull(){
+      $git="cd /data/wwwroot/default/weixin1907 && git pull ";
+      shell_exec($git);
+    }
+
+
 
   }
