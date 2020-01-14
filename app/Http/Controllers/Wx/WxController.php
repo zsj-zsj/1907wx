@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redis;
 
 use App\Model\WxUserModel;  //用户
 use App\Model\MediaModel;   //素材
+use App\Model\MsgModel;     //文字消息入库
 
 use GuzzleHttp\Client;
 use App\Tools\Curl;
@@ -133,6 +134,16 @@ class WxController extends Controller
             }
             Wechat::echomsg($openid,$ToUserName,$Content); 
           }elseif($MsgType=='text'){
+            //消息入库
+            $opid=WxUserModel::where('openid','=',$openid)->value('u_id');   //获取id 一开始就获取了  根据openid 获取一个值  键
+            // dd($opid);
+            $datatext=[
+              'uid'=>$opid,
+              'msg'=>$Content,
+              'time'=>time()
+            ];
+            // dd($datatext);
+            MsgModel::insert($datatext);   //消息入库
             Wechat::echomsg($openid,$ToUserName,date('Y-m-d H:i:s')."：".$Content);
           }
         }elseif($MsgType=='image'){
