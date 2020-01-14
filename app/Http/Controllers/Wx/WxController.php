@@ -320,7 +320,7 @@ class WxController extends Controller
         // }
         print_r($u['nickname']);
         echo "<img src='".$u['headimgurl']."'>";
-        // echo '<hr>';
+        echo '<hr>';
         // print_r($u);
       }
 
