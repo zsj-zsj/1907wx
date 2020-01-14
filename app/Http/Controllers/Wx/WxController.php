@@ -205,13 +205,7 @@ class WxController extends Controller
               'type'=>'location_select',
               'name'=>'发送位置',
               'key'=>'asdffg'
-            ],
-            [
-              'type'=>'scancode_waitmsg',
-              'name'=>'扫码',
-              'key'=>'rselfmenu_0_0'
-            ],
-        
+            ],        
             [
               'name'=>'菜单',
               'sub_button'=>[
@@ -302,19 +296,19 @@ class WxController extends Controller
       $key='h:userinfo:'.$arr['openid'];
       Redis::hMset($key,$arr);
 
-      print_r($arr);
-      echo "<hr>";
+      // print_r($arr);
+      // echo "<hr>";
 
     
       //实现签到 记录用户签到
       $redis_key='checkin:'.date('Y-m-d');  //设置redis
       Redis::Zadd($redis_key,time(),$arr['openid']);   //将openid加入有序集合
       echo $arr['nickname']."~签到成功：".date('Y-m-d H:i:s');
-      echo "<hr>";
+      // echo "<hr>";
 
       $userlist=Redis::zrange($redis_key,0,-1);     //redis 存入的openid
       echo '<br>';
-      print_r($userlist);
+      // print_r($userlist);
 
 
       foreach($userlist as $k=>$v){    //$v 是openid
@@ -324,10 +318,10 @@ class WxController extends Controller
         // if(empty($u)){     判断 为空 跳过 执行下面的
         //   continue;
         // }
-
+        print_r($u['nickname']);
         echo "<img src='".$u['headimgurl']."'>";
-        echo '<hr>';
-        print_r($u);
+        // echo '<hr>';
+        // print_r($u);
       }
 
 
