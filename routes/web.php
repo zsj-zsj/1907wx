@@ -80,3 +80,9 @@ Route::post('wxnew','News\WxNew@WxNew');
 
 
 
+
+
+Route::any('aaaaaaa','Lianxi\weixin@weixin');
+
+
+
