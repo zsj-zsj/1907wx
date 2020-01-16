@@ -9,6 +9,11 @@ use App\Model\UserModel;
 
 class Openid extends Controller
 {
+    public function aaa(){
+        $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.urlEncode('http://www.zsjshaojie.top/openid/code').'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+        echo $url;
+    }
+
     public function code(){
         $code=$_GET['code'];
         // dd($code);
@@ -21,7 +26,7 @@ class Openid extends Controller
         $jsons=file_get_contents($urls);
         $arr=json_decode($jsons,true);      //用户信息
         $openid=$arr['openid'];
-        print_r($openid);
+        // print_r($openid);
         // UserModel::create($openid);
         return redirect('openid/index');
     }
