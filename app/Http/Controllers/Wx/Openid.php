@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Wx;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\UserModel;
+use Illuminate\Support\Facades\Hash;
 
 
 class Openid extends Controller
