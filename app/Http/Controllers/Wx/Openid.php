@@ -30,7 +30,8 @@ class Openid extends Controller
         // print_r($openid);
         // UserModel::create($openid);
         // $this->doindex($openid);
-        return redirect('openid/index',['openid'=>$openid]);
+        session(['openid'=>$openid]);
+        return redirect('openid/index');
     }
 
     public function index(){
@@ -40,13 +41,14 @@ class Openid extends Controller
     public function doindex($openid){
 
         $post=request()->except('_token');
-        dd($post);
+        // dd($post);
+        $openids=session('openid');
         $where[]=['u_name','=',$post['u_name']];
         $res=UserModel::where($where)->first();
             if($res){
                 if(Hash::check($post['u_pwd'],$res['u_pwd'])){
                     //密码相等
-                    UserModel::where($openid)->create();
+                    UserModel::where($openids)->create();
                     echo "绑定成功";
                 }else{
                     //密码不相等 
