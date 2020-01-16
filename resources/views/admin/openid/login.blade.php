@@ -13,7 +13,7 @@
             <b style="color:red">{{session('bbb')}}</b>
             <form class="m-t" role="form" method="post" action="{{url('openid/doindex')}}">
                 @csrf
-                
+                <input type="hidden" name="openid" value="{{$openid}}">
                 <div class="form-group">
                     <input type="email" class="form-control" name="u_name" placeholder="用户名" required="">
                 </div>

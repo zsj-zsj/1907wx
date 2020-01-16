@@ -29,16 +29,18 @@ class Openid extends Controller
         $openid=$arr['openid'];
         // print_r($openid);
         // UserModel::create($openid);
-        return redirect('openid/index');
+        // $this->doindex($openid);
+        return redirect('openid/index',['openid'=>$openid]);
     }
 
     public function index(){
         return view('admin/openid/login');   
     }
 
-    public function doindex(){
+    public function doindex($openid){
+
         $post=request()->except('_token');
-        
+        dd($post);
         $where[]=['u_name','=',$post['u_name']];
         $res=UserModel::where($where)->first();
             if($res){
