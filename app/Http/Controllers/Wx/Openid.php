@@ -26,9 +26,9 @@ class Openid extends Controller
         $urls='https://api.weixin.qq.com/sns/userinfo?access_token='.$data['access_token'].'&openid='.$data['openid'].'&lang=zh_CN';
         $jsons=file_get_contents($urls);
         $arr=json_decode($jsons,true);      //用户信息
-        // dd($arr);
+        dd($arr['openid']);
+
         UserModel::insert($arr['openid']);
         return view('admin/openid/login');
-        
     }
 }
