@@ -38,7 +38,7 @@ class Openid extends Controller
         return view('admin/openid/login');   
     }
 
-    public function doindex($openid){
+    public function doindex(){
 
         $post=request()->except('_token');
         // dd($post);
