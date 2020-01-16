@@ -31,7 +31,7 @@ class Openid extends Controller
         // UserModel::create($openid);
         // $this->doindex($openid);
         session(['openid'=>$openid]);
-        return redirect('openid/index');
+        return view('admin/openid/login'); 
     }
 
     public function index(){
