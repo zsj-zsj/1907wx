@@ -18,20 +18,48 @@
                 @csrf
                 
                 <div class="form-group">
-                    <input type="email" class="form-control" name="u_name" placeholder="用户名" required="">
+                    <input type="text" class="form-control" id="name" name="u_name" placeholder="用户名" required="">
                     <b style="color:red"> @php echo $errors->first('u_name'); @endphp </b>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="u_pwd" placeholder="密码" required="">
+                    <input type="password" class="form-control" id="pwd" name="u_pwd" placeholder="密码" required="">
                     <b style="color:red"> @php echo $errors->first('u_pwd'); @endphp </b>
                 </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="code"  placeholder="验证码" required="">
+                    <b style="color:red">{{session('hhhh')}}</b>  
+                    <button type="button" id="yzm" class="btn btn-primary block full-width m-b">微信验证码</button>
+                </div>
+
                 <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
 
-
-                <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="{{url('reg')}}">注册一个新账号</a>
+                <p class="text-muted text-center"><a href="{{url('reg')}}">注册一个新账号</a>
                 </p>
 
             </form>
         </div>
     </div>
-    @endsection
+
+    {{-- 获取验证码 --}}
+    <script>
+        
+            $(document).on('click','#yzm',function(){
+                $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+                // alert(1);
+                var name=$("#name").val();
+                var pwd=$("#pwd").val();
+                $.ajax({
+                    method:"POST",
+                    data:{name:name,pwd:pwd},
+                    url:"{{url('getcode')}}"
+                }).done(function(res){
+                    alert(res);
+                })
+            })
+       
+    </script>
+
+@endsection
+
+   

@@ -19,6 +19,8 @@
         <!-- 全局js -->
         <script src="/admin.bak/js/jquery.min.js?v=2.1.4"></script>
         <script src="/admin.bak/js/bootstrap.min.js?v=3.3.6"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script src="/jq.js"></script>
 </head>
 
 <body class="gray-bg">

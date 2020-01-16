@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Model\UserModel;
 use Illuminate\Support\Facades\Hash;
 
+use App\Tools\Wechat;
+use App\Tools\Curl;
+
 class Login extends Controller
 {
     //展示注册
@@ -64,6 +67,10 @@ class Login extends Controller
                     'error_num'=>0,
                     'error_time'=>0
                 ];
+                $session=session('code');
+                if($session!=$post['code']){
+                    return redirect('login')->with('hhhh','请输入相对正确的微信验证码');
+                }
                 UserModel::where(['u_name'=>$post['u_name']])->update($data);
 
                 return redirect('admin/index');
@@ -96,7 +103,45 @@ class Login extends Controller
         }else{
             return redirect('login')->with('aaa','用户不存在');
         }
+
+        
+        
+        
     }
 
+    public function getcode(){
+        $name=request()->name;
+        $pwd=request()->pwd;
+        $userinfo=UserModel::where(['u_name'=>$name])->first();
+        // dd($userinfo);
+        if(Hash::check($pwd,$userinfo->u_pwd)){
+            $openid=$userinfo->openid;
+            $code=rand(111111,999999);
+            session(['code'=>$code]);
+            $this->sendCode($name,$openid,$code);
+        }
+    }
+    
+    public function sendCode($name,$openid,$code){
+        $access_token=Wechat::getAccessToken();
+        $url='https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.$access_token;
+        $data=[
+            'touser'=>$openid,
+            'template_id'=>'4Is6A6iJjqOTqMepw6LSgwgWarzldrcE3zN5QGxgn30',
+            'data'=>[
+                'name'=>[
+                    'value'=>$name,
+                    'color'=>'#000000'
+                ],
+                'code'=>[
+                    'value'=>$code,
+                    'color'=>'#000000'
+                ],
+            ]
+        ];
+        $arr=json_encode($data,JSON_UNESCAPED_UNICODE);
+        $code=Curl::CurlPost($url,$arr);
+        print_r($code);
 
+    }
 }

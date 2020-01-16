@@ -14,7 +14,7 @@
             <form class="m-t" role="form" method="post" action="{{url('openid/doindex')}}">
                 @csrf
                 <div class="form-group">
-                    <input type="email" class="form-control" name="u_name" placeholder="用户名" required="">
+                    <input type="text" class="form-control" name="u_name" placeholder="用户名" required="">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="u_pwd" placeholder="密码" required="">

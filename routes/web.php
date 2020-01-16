@@ -40,9 +40,12 @@ Route::get('openid/aaa','Wx\Openid@aaa');
 
 Route::get('openid/index','Wx\Openid@index');   //展示html
 Route::get('openid/code','Wx\Openid@code');   //接受code
-Route::post('openid/doindex','Wx\Openid@doindex');   //接受code
+Route::post('openid/doindex','Wx\Openid@doindex');   //执行入库openid
 
+//微信验证码
+Route::get('sendCode','Login\Login@sendCode'); //测试
 
+Route::post('getcode','Login\Login@getcode'); //发送验证码
 
 //后台
 Route::get('login','Login\Login@login'); //登录页面
