@@ -220,7 +220,7 @@ class WxController extends Controller
             [
               'type'=>'view',
               'name'=>'绑定账号',
-              'url'=>'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.urlEncode('http://www.zsjshaojie.top/openid/login').'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+              'url'=>'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.urlEncode('http://www.zsjshaojie.top/openid/code').'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
             ],        
             [
               'name'=>'菜单',
