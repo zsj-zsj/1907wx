@@ -9,10 +9,6 @@ use App\Model\UserModel;
 
 class Openid extends Controller
 {
-    public function index(){
-        return view('admin/openid/login');   
-    }
-
     public function code(){
         $code=$_GET['code'];
         // dd($code);
@@ -25,8 +21,12 @@ class Openid extends Controller
         $jsons=file_get_contents($urls);
         $arr=json_decode($jsons,true);      //用户信息
         $openid=$arr['openid'];
-        // dd($openid);
+        dd($openid);
         // UserModel::create($openid);
         return redirect('openid/index');
+    }
+
+    public function index(){
+        return view('admin/openid/login');   
     }
 }
