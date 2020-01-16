@@ -48,7 +48,7 @@ class Openid extends Controller
             if($res){
                 if(Hash::check($post['u_pwd'],$res['u_pwd'])){
                     //密码相等
-                    UserModel::where($openids)->create();
+                    UserModel::where($where)->update(['openid'=>$openids]);
                     echo "绑定成功";
                 }else{
                     //密码不相等 
