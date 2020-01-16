@@ -10,7 +10,7 @@
                 <h1 class="logo-name">h</h1>
 
             </div>
-            <form class="m-t" role="form" method="post" action="">
+            <form class="m-t" role="form" method="post" action="{{url('openid/docode')}}">
                 @csrf
                 
                 <div class="form-group">

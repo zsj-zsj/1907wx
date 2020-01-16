@@ -28,7 +28,11 @@ class Openid extends Controller
         $arr=json_decode($jsons,true);      //用户信息
         $openid=$arr['openid'];
         // dd($openid);
-        UserModel::insert($openid);
+        UserModel::create($openid);
         return redirect('openid/code');
+    }
+
+    public function docode(){
+        echo "你好";
     }
 }
