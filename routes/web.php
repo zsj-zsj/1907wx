@@ -35,9 +35,9 @@ Route::get('auth','Wx\WxController@auth');   //接受code
 
 
 //绑定账号
-Route::get('openid/login','Wx\Openid@index');   //接受code
+Route::get('openid/index','Wx\Openid@index');   //展示html
 Route::get('openid/code','Wx\Openid@code');   //接受code
-Route::get('openid/docode','Wx\Openid@docode');   //接受code
+// Route::get('openid/docode','Wx\Openid@docode');   //接受code
 
 
 
