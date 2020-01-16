@@ -34,6 +34,11 @@ Route::get('code','Wx\WxController@code');   //获取用户授权code
 Route::get('auth','Wx\WxController@auth');   //接受code
 
 
+//绑定账号
+Route::get('openid/login','Wx\Openid@index');   //接受code
+
+
+
 //后台
 Route::get('login','Login\Login@login'); //登录页面
 Route::get('reg','Login\Login@reg');   //注册页面

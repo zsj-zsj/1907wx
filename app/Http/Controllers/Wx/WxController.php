@@ -216,6 +216,11 @@ class WxController extends Controller
               'type'=>'location_select',
               'name'=>'发送位置',
               'key'=>'asdffg'
+            ],
+            [
+              'type'=>'view',
+              'name'=>'绑定账号',
+              'url'=>'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.urlEncode('http://www.zsjshaojie.top/openid/login').'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
             ],        
             [
               'name'=>'菜单',
@@ -289,7 +294,7 @@ class WxController extends Controller
       // dd($url);
       echo $url;
     }
-
+    //签到入库redis
     public function auth(){
       //通过code换取网页授权access_token
       $code=$_GET['code'];
