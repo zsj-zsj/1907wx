@@ -21,7 +21,7 @@ class Openid extends Controller
         $jsons=file_get_contents($urls);
         $arr=json_decode($jsons,true);      //用户信息
         $openid=$arr['openid'];
-        dd($openid);
+        print_r($openid);
         // UserModel::create($openid);
         return redirect('openid/index');
     }
