@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Wx;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\UserModel;
+
 
 class Openid extends Controller
 {
@@ -20,10 +22,13 @@ class Openid extends Controller
         // dd($url);
         $json=file_get_contents($url);
         $data=json_decode($json,true);
-        print_r($data);
-
-
-
+        // print_r($data);
+        $urls='https://api.weixin.qq.com/sns/userinfo?access_token='.$data['access_token'].'&openid='.$data['openid'].'&lang=zh_CN';
+        $jsons=file_get_contents($urls);
+        $arr=json_decode($jsons,true);      //用户信息
+        // dd($arr);
+        UserModel::insert($arr['openid']);
         return view('admin/openid/login');
+        
     }
 }
