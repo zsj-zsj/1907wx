@@ -40,7 +40,7 @@ Route::get('openid/aaa','Wx\Openid@aaa');
 
 Route::get('openid/index','Wx\Openid@index');   //展示html
 Route::get('openid/code','Wx\Openid@code');   //接受code
-// Route::get('openid/docode','Wx\Openid@docode');   //接受code
+Route::post('openid/doindex','Wx\Openid@doindex');   //接受code
 
 
 

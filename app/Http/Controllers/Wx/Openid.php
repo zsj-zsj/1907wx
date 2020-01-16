@@ -34,4 +34,24 @@ class Openid extends Controller
     public function index(){
         return view('admin/openid/login');   
     }
+
+    public function doindex(){
+        $post=request()->except('_token');
+        
+        $where[]=['u_name','=',$post['u_name']];
+        $res=UserModel::where($where)->first();
+            if($res){
+                if(Hash::check($post['u_pwd'],$res['u_pwd'])){
+                    //密码相等
+                    UserModel::where($openid)->create();
+                    echo "绑定成功";
+                }else{
+                    //密码不相等 
+                    return redirect('openid/index')->with('aaa','密码不正确');
+                }
+            }else{
+                return redirect('openid/index')->with('bbb','用户不存在');
+            }
+    }
+    
 }
