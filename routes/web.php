@@ -42,6 +42,12 @@ Route::get('openid/index','Wx\Openid@index');   //展示html
 Route::get('openid/code','Wx\Openid@code');   //接受code
 Route::post('openid/doindex','Wx\Openid@doindex');   //执行入库openid
 
+Route::get('openid/loginewm','Wx\Openid@loginewm');    //二维码登录页面
+Route::get('openid/sscan','Wx\Openid@sscan');    //二维码登录页面
+Route::get('openid/weixinlogin','Wx\Openid@weixinlogin');  //ajax
+ 
+
+
 //微信验证码
 Route::get('sendCode','Login\Login@sendCode'); //测试
 
@@ -69,7 +75,7 @@ Route::prefix('/admin')->group(function(){
     Route::post('addticket','Index\Ticket@store');   //执行添加
     Route::get('ticketindex','Index\Ticket@index');  //列表
     Route::get('table','Index\Ticket@table');        //统计图
-}); 
+});
 
 
 

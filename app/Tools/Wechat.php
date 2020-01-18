@@ -94,7 +94,7 @@ class Wechat
         // $Post='{"expire_seconds": 604800, "action_name": "QR_STR_SCENE", "action_info": {"scene": {"scene_str": "'.$channel_status.'"}}}';   //参数
    
         $Post=[
-          'expire_seconds'=>604800,
+          'expire_seconds'=>2592000,
           'action_name'=>'QR_STR_SCENE',
           'action_info'=>[
             'scene'=>[

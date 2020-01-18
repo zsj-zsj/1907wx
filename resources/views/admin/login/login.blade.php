@@ -34,7 +34,7 @@
 
                 <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
 
-                <p class="text-muted text-center"><a href="{{url('reg')}}">注册一个新账号</a>
+                <p class="text-muted text-center"><a href="{{url('reg')}}">注册一个新账号</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{url('openid/loginewm')}}">扫码登陆</a>
                 </p>
 
             </form>
