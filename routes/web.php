@@ -45,6 +45,8 @@ Route::post('openid/doindex','Wx\Openid@doindex');   //执行入库openid
 Route::get('openid/loginewm','Wx\Openid@loginewm');    //二维码登录页面
 Route::get('openid/sscan','Wx\Openid@sscan');    //二维码登录页面
 Route::get('openid/weixinlogin','Wx\Openid@weixinlogin');  //ajax
+Route::get('openid/wysq','Wx\Openid@wysq');  //ajax
+
  
 
 
