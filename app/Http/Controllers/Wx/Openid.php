@@ -75,7 +75,7 @@ class Openid extends Controller
 
     public function sscan(){
         $id=request('status');
-        $redirect_uri=urlEncode('http://www.zsjshaojie.top/openid/loginewm');
+        $redirect_uri=urlEncode('http://www.zsjshaojie.top/openid/sscan');
       $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
       $code=$_GET['code'];
 
