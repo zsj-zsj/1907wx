@@ -68,9 +68,9 @@ class Openid extends Controller
     //展示二维码
     public function loginewm(){
         $status=time().rand(111,999);
-        // $url="http://www.zsjshaojie.top/openid/sscan?status=".$status;
-        $redirect_uri=urlEncode('http://www.zsjshaojie.top/openid/sscan'.$status);
-      $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+        $url="http://www.zsjshaojie.top/openid/sscan?status=".$status;
+        $redirect_uri=urlEncode('http://www.zsjshaojie.top/openid/sscan');
+      $urls='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
         return view('admin/login/ewm',['url'=>$url,'status'=>$status]);
     }
 
