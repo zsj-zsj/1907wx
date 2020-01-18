@@ -68,21 +68,16 @@ class Openid extends Controller
     //展示二维码
     public function loginewm(){
         $status=time().rand(111,999);
-        $url="http://www.zsjshaojie.top/openid/sscan?wysq=".$status;
+        $url="http://www.zsjshaojie.top/openid/sscan?status=".$status;
         return view('admin/login/ewm',['url'=>$url,'status'=>$status]);
     }
 
-    public function wysq(){
-        $id=request('status');
-        $redirect_uri=urlEncode('http://www.zsjshaojie.top/openid/sscan');
-      $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
-    }
 
     public function sscan(){
         $id=request('status');
-        // $redirect_uri=urlEncode('http://www.zsjshaojie.top/openid/sscan');
-    //   $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
-        // dd($url);
+        $redirect_uri=urlEncode('http://www.zsjshaojie.top/openid/sscan');
+      $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+        echo $url;
       $code=$_GET['code'];
 
       $url='https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('APPID').'&secret='.env('APPSECRET').'&code='.$code.'&grant_type=authorization_code';
