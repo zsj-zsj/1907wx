@@ -78,7 +78,7 @@ class Openid extends Controller
 
         $openid=$this->getOpenid();
 
-      Cache::put('WxLogin_'.$id,$openid,10);
+        Cache::put('WxLogin_'.$id,$openid,10);
         return '扫码成功,请等待PC端跳转';
     }
 
@@ -96,6 +96,7 @@ class Openid extends Controller
         return json_encode(['ret'=>1,'msg'=>'正在登陆中']);
 
     }
+    
 
     
 
@@ -115,8 +116,8 @@ class Openid extends Controller
         $code = request()->input('code');
         if(empty($code)){
             //没有授权 跳转到微信服务器进行授权
-            $host = $_SERVER['www.zsjshaojie.top'];  //域名
-            $uri = $_SERVER['/openid/sscan']; //路由参数
+            $host = $_SERVER['HTTP_HOST'];  //域名
+            $uri = $_SERVER['REQUEST_URI']; //路由参数
             $redirect_uri = urlencode("http://".$host.$uri);  // ?code=xx
             // dd($redirect_uri);
             $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('APPID')."&redirect_uri={$redirect_uri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
