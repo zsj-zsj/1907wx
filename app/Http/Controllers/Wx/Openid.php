@@ -85,18 +85,19 @@ class Openid extends Controller
     public function weixinlogin(){
         $status=request('status');
       
-        // $user=UserModel::get()->toArray();
-        
-        // $openid=array_column($user,'openid');
+        $user=UserModel::get()->toArray();
+        $openidsql=array_column($user,'openid');
+
+        // dd($openidsql);
         $openid=Cache::get('WxLogin_'.$status);
 
-        if(!$openid){
-            return json_encode(['ret'=>0,'msg'=>'请先绑定']);
+        if(!$openid && !$openidsql ){
+            return json_encode(['ret'=>0,'msg'=>'扫码失败或未绑定账号']);
         }
         return json_encode(['ret'=>1,'msg'=>'正在登陆中']);
 
     }
-    
+
 
     
 
