@@ -75,25 +75,12 @@ class Openid extends Controller
 
     public function sscan(){
         $id=request('status');
-        $redirect_uri=urlEncode('http://www.zsjshaojie.top/openid/sscan');
-      $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('APPID').'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
-      $code=$_GET['code'];
 
-      $url='https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('APPID').'&secret='.env('APPSECRET').'&code='.$code.'&grant_type=authorization_code';
-      $json=file_get_contents($url);
-      $data=json_decode($json,true);
-      // dd($data);
+        $openid=$this->getOpenid();
 
-      //拉取用户信息
-      $urls='https://api.weixin.qq.com/sns/userinfo?access_token='.$data['access_token'].'&openid='.$data['openid'].'&lang=zh_CN';
-      $jsons=file_get_contents($urls);
-      $arr=json_decode($jsons,true);      //用户信息
-    //   $arr['openid'];
-      Cache::put('WxLogin_'.$id,$arr['openid'],10);
+      Cache::put('WxLogin_'.$id,$openid,10);
         return '扫码成功,请等待PC端跳转';
     }
-
-
 
     public function weixinlogin(){
         $status=request('status');
@@ -111,4 +98,39 @@ class Openid extends Controller
     }
 
     
+
+    /**
+     * 网页授权获取用户openid
+     * @return [type] [description]
+     */
+    public static function getOpenid()
+    {
+        //先去session里取openid 
+        $openid = session('openid');
+        //var_dump($openid);die;
+        if(!empty($openid)){
+            return $openid;
+        }
+        //微信授权成功后 跳转咱们配置的地址 （回调地址）带一个code参数
+        $code = request()->input('code');
+        if(empty($code)){
+            //没有授权 跳转到微信服务器进行授权
+            $host = $_SERVER['www.zsjshaojie.top'];  //域名
+            $uri = $_SERVER['/openid/sscan']; //路由参数
+            $redirect_uri = urlencode("http://".$host.$uri);  // ?code=xx
+            // dd($redirect_uri);
+            $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('APPID')."&redirect_uri={$redirect_uri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+            header("location:".$url);die;
+        }else{
+            //通过code换取网页授权access_token
+            $url =  "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".env('APPID')."&secret=".env('APPSECRET')."&code={$code}&grant_type=authorization_code";
+            $data = file_get_contents($url);
+            $data = json_decode($data,true);
+            $openid = $data['openid'];
+            //获取到openid之后  存储到session当中
+            session(['openid'=>$openid]);
+            return $openid;
+            //如果是非静默授权 再通过openid  access_token获取用户信息
+        }   
+    }
 }
